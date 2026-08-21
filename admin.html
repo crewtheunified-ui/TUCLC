@@ -13,30 +13,97 @@
 
   <style>
     body{
+      margin:0;
       background:#f5fbfe;
+      font-family:"Hind Siliguri",sans-serif;
     }
 
-    .panel{
-      max-width:1200px;
-      margin:35px auto;
-      padding:0 15px 50px;
+    .admin-login{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:20px;
+      background:linear-gradient(135deg,#e9f9ff,#fff0f7);
     }
 
-    .bar{
+    .login-box{
+      width:min(430px,100%);
+      background:#fff;
+      padding:32px;
+      border-radius:24px;
+      box-shadow:0 20px 55px rgba(0,0,0,.12);
+      text-align:center;
+    }
+
+    .login-box img{
+      width:115px;
+      height:115px;
+      object-fit:contain;
+      margin-bottom:10px;
+    }
+
+    .login-box h2{
+      margin:8px 0;
+      color:#10213b;
+    }
+
+    .login-box p{
+      color:#617085;
+    }
+
+    .login-input{
+      width:100%;
+      box-sizing:border-box;
+      padding:13px 14px;
+      margin:7px 0;
+      border:1px solid #d5e3ea;
+      border-radius:10px;
+      font:inherit;
+      outline:none;
+    }
+
+    .login-input:focus{
+      border-color:#19aee8;
+    }
+
+    .login-error{
+      min-height:24px;
+      color:#d82732;
+      margin-top:8px;
+    }
+
+    .admin-wrap{
+      width:min(1250px,94%);
+      margin:25px auto;
+      padding-bottom:50px;
+    }
+
+    .admin-top{
+      background:#fff;
+      padding:18px 22px;
+      border-radius:18px;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:15px;
-      background:#fff;
-      padding:18px 22px;
-      border-radius:18px;
-      box-shadow:0 8px 25px #0001;
+      box-shadow:0 8px 25px rgba(0,0,0,.06);
+    }
+
+    .admin-top h2{
+      margin:0;
+      color:#10213b;
+    }
+
+    .admin-top small{
+      display:block;
+      color:#6b7d8b;
+      margin-top:3px;
     }
 
     .tabs{
       display:flex;
-      gap:8px;
       flex-wrap:wrap;
+      gap:8px;
       margin:18px 0;
     }
 
@@ -46,41 +113,41 @@
       padding:10px 14px;
       border-radius:10px;
       cursor:pointer;
-      font-weight:700;
+      font:600 15px "Hind Siliguri";
     }
 
     .tab.active{
-      background:#087fbe;
+      background:#087fc1;
       color:#fff;
+      border-color:#087fc1;
     }
 
-    .box{
+    .panel-box{
       background:#fff;
-      padding:22px;
       border-radius:18px;
+      padding:22px;
       margin-bottom:18px;
-      box-shadow:0 5px 20px #00000008;
+      box-shadow:0 8px 25px rgba(0,0,0,.05);
     }
 
-    .formgrid{
+    .form-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:12px;
     }
 
-    .formgrid input,
-    .formgrid textarea,
-    .formgrid select{
+    .form-grid input,
+    .form-grid textarea,
+    .form-grid select{
       width:100%;
-      padding:11px 12px;
-      border:1px solid #d7e4ea;
-      border-radius:9px;
-      font:inherit;
       box-sizing:border-box;
-      background:#fff;
+      padding:12px 13px;
+      border:1px solid #d5e3ea;
+      border-radius:10px;
+      font:inherit;
     }
 
-    .formgrid textarea{
+    .form-grid textarea{
       grid-column:1/-1;
       min-height:90px;
       resize:vertical;
@@ -90,121 +157,72 @@
       grid-column:1/-1;
     }
 
-    .tablewrap{
+    .btn{
+      border:0;
+      border-radius:10px;
+      padding:11px 16px;
+      font:600 15px "Hind Siliguri";
+      cursor:pointer;
+    }
+
+    .btn-red{
+      background:#ef3035;
+      color:#fff;
+    }
+
+    .btn-green{
+      background:#079447;
+      color:#fff;
+    }
+
+    .btn-blue{
+      background:#087fc1;
+      color:#fff;
+    }
+
+    .btn-light{
+      background:#fff;
+      border:1px solid #ccdce5;
+      color:#10213b;
+    }
+
+    .btn-danger{
+      background:#d82732;
+      color:#fff;
+    }
+
+    .btn-small{
+      padding:7px 10px;
+      font-size:13px;
+    }
+
+    .actions{
+      display:flex;
+      gap:7px;
+      flex-wrap:wrap;
+    }
+
+    .table-wrap{
       overflow:auto;
     }
 
     table{
       width:100%;
+      min-width:900px;
       border-collapse:collapse;
-      min-width:850px;
     }
 
     th,td{
       padding:11px;
-      border-bottom:1px solid #e6eef2;
+      border-bottom:1px solid #e5edf2;
       text-align:left;
-      font-size:14px;
       vertical-align:middle;
+      font-size:14px;
     }
 
     th{
-      background:#f5fbff;
+      background:#f3fbff;
       color:#10213b;
-    }
-
-    .danger{
-      background:#d82732!important;
-      color:white!important;
-    }
-
-    .success{
-      background:#079447!important;
-      color:white!important;
-    }
-
-    .muted{
-      color:#6b7d8b;
-      font-size:13px;
-    }
-
-    .login{
-      max-width:430px;
-      margin:12vh auto;
-      background:white;
-      padding:30px;
-      border-radius:22px;
-      box-shadow:0 15px 45px #07507818;
-      text-align:center;
-    }
-
-    .login img{
-      width:110px;
-      height:110px;
-      object-fit:contain;
-      display:block;
-      margin:auto;
-    }
-
-    .login input{
-      width:100%;
-      padding:13px;
-      margin:7px 0;
-      border:1px solid #d6e2e8;
-      border-radius:10px;
-      font:inherit;
-      box-sizing:border-box;
-    }
-
-    .msg{
-      min-height:24px;
-      color:#d82732;
-      margin-top:10px;
-    }
-
-    .modalBackdrop{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:#071b2dcc;
-      z-index:9999;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
-
-    .modalBox{
-      width:min(760px,100%);
-      max-height:90vh;
-      overflow:auto;
-      background:#fff;
-      border-radius:20px;
-      padding:24px;
-    }
-
-    .modalTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:18px;
-    }
-
-    .close{
-      border:0;
-      background:#fee2e2;
-      color:#d82732;
-      border-radius:9px;
-      width:38px;
-      height:38px;
-      font-size:22px;
-      cursor:pointer;
-    }
-
-    .actionRow{
-      display:flex;
-      gap:7px;
-      flex-wrap:wrap;
     }
 
     .stats{
@@ -213,40 +231,77 @@
       gap:15px;
     }
 
-    .statCard{
-      background:linear-gradient(135deg,#fff,#eefaff);
-      border:1px solid #e3edf5;
+    .stat{
+      background:linear-gradient(135deg,#fff,#effaff);
+      border:1px solid #e1edf4;
       border-radius:16px;
-      padding:20px;
+      padding:22px;
     }
 
-    .statCard h3{
-      margin:0;
-      font-size:30px;
+    .stat strong{
+      display:block;
+      font-size:32px;
       color:#087fc1;
     }
 
-    .noticeBody{
-      white-space:pre-wrap;
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:rgba(7,27,45,.72);
+      padding:18px;
+      align-items:center;
+      justify-content:center;
     }
 
-    @media(max-width:700px){
-      .formgrid{
-        grid-template-columns:1fr;
-      }
+    .modal-box{
+      width:min(760px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:20px;
+      padding:24px;
+    }
 
-      .formgrid textarea,
-      .full{
-        grid-column:auto;
-      }
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      margin-bottom:18px;
+    }
 
+    .modal-close{
+      border:0;
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      background:#fee2e2;
+      color:#d82732;
+      font-size:23px;
+      cursor:pointer;
+    }
+
+    .muted{
+      color:#6b7d8b;
+      font-size:13px;
+    }
+
+    @media(max-width:720px){
+      .form-grid,
       .stats{
         grid-template-columns:1fr;
       }
 
-      .bar{
-        align-items:flex-start;
+      .form-grid textarea,
+      .full{
+        grid-column:auto;
+      }
+
+      .admin-top{
         flex-direction:column;
+        align-items:flex-start;
       }
     }
   </style>
@@ -254,69 +309,85 @@
 
 <body>
 
-<!-- =========================
-     LOGIN
-========================= -->
+<!-- =====================================================
+     ONE AND ONLY LOGIN
+===================================================== -->
 
-<div id="login" class="login">
+<section id="loginScreen" class="admin-login">
 
-  <img src="assets/logo.png" alt="TUCLC">
+  <div class="login-box">
 
-  <h2>🔐 TUCLC Admin Login</h2>
+    <img
+      src="assets/logo.png"
+      alt="TUCLC Logo"
+    >
 
-  <p>
-    শুধু অনুমোদিত Admin account ব্যবহার করুন।
-  </p>
+    <h2>🔐 TUCLC Admin Login</h2>
 
-  <input
-    id="email"
-    type="email"
-    value="crewtheunified@gmail.com"
-    placeholder="Admin Email"
-  >
+    <p>
+      শুধু অনুমোদিত Admin account ব্যবহার করুন।
+    </p>
 
-  <input
-    id="password"
-    type="password"
-    placeholder="Password"
-  >
+    <input
+      id="loginEmail"
+      class="login-input"
+      type="email"
+      value="crewtheunified@gmail.com"
+      placeholder="Admin Email"
+    >
 
-  <button
-    class="btn red"
-    style="width:100%"
-    onclick="login()"
-  >
-    Login
-  </button>
+    <input
+      id="loginPassword"
+      class="login-input"
+      type="password"
+      placeholder="Password"
+    >
 
-  <div id="msg" class="msg"></div>
+    <button
+      class="btn btn-red"
+      style="width:100%"
+      onclick="doLogin()"
+    >
+      Login
+    </button>
 
-</div>
+    <div
+      id="loginError"
+      class="login-error"
+    ></div>
+
+  </div>
+
+</section>
 
 
-<!-- =========================
-     ADMIN APP
-========================= -->
+<!-- =====================================================
+     ONE AND ONLY ADMIN APP
+===================================================== -->
 
-<div id="app" class="panel" hidden>
+<section
+  id="adminApp"
+  class="admin-wrap"
+  style="display:none"
+>
 
-  <div class="bar">
+  <div class="admin-top">
 
     <div>
-      <b style="font-size:18px">
-        🛠️ TUCLC Admin Panel
-      </b>
 
-      <small
-        style="display:block;color:#6b7d8b"
-      >
+      <h2>
+        🛠️ TUCLC Admin Panel
+      </h2>
+
+      <small>
         Supabase Online Database
       </small>
+
     </div>
 
     <button
-      class="btn red"
-      onclick="logout()"
+      class="btn btn-red"
+      onclick="doLogout()"
     >
       Logout
     </button>
@@ -324,55 +395,53 @@
   </div>
 
 
-  <!-- TABS -->
-
   <div class="tabs">
 
     <button
       class="tab active"
-      onclick="show('dashboard',this)"
+      onclick="openTab('dashboard',this)"
     >
       Dashboard
     </button>
 
     <button
       class="tab"
-      onclick="show('students',this)"
+      onclick="openTab('students',this)"
     >
       Students
     </button>
 
     <button
       class="tab"
-      onclick="show('teachers',this)"
+      onclick="openTab('teachers',this)"
     >
       Teachers
     </button>
 
     <button
       class="tab"
-      onclick="show('results',this)"
+      onclick="openTab('results',this)"
     >
       Exam Result
     </button>
 
     <button
       class="tab"
-      onclick="show('notices',this)"
+      onclick="openTab('notices',this)"
     >
       Notices
     </button>
 
     <button
       class="tab"
-      onclick="show('admissions',this)"
+      onclick="openTab('admissions',this)"
     >
       Admissions
     </button>
 
     <button
       class="tab"
-      onclick="show('settings',this)"
+      onclick="openTab('settings',this)"
     >
       Settings
     </button>
@@ -382,25 +451,28 @@
 
   <div id="content"></div>
 
-</div>
+</section>
 
 
-<!-- =========================
+<!-- =====================================================
      MODAL
-========================= -->
+===================================================== -->
 
-<div id="modalBackdrop" class="modalBackdrop">
+<div
+  id="modal"
+  class="modal"
+>
 
-  <div class="modalBox">
+  <div class="modal-box">
 
-    <div class="modalTop">
+    <div class="modal-head">
 
       <h2 id="modalTitle">
         Form
       </h2>
 
       <button
-        class="close"
+        class="modal-close"
         onclick="closeModal()"
       >
         ×
@@ -408,7 +480,7 @@
 
     </div>
 
-    <div id="modalContent"></div>
+    <div id="modalBody"></div>
 
   </div>
 
@@ -416,10 +488,6 @@
 
 
 <script>
-
-/* ==================================================
-   SUPABASE
-================================================== */
 
 const SUPABASE_URL =
   "https://wdiiftvtmtvsokdgyqmr.supabase.co";
@@ -433,92 +501,53 @@ const db =
     SUPABASE_KEY
   );
 
-
 const ADMIN_EMAIL =
   "crewtheunified@gmail.com";
 
 
-/* ==================================================
-   HELPERS
-================================================== */
+function esc(value){
 
-const esc = (v) =>
-  String(v ?? "").replace(
-    /[&<>"']/g,
-    (m) => ({
+  return String(value ?? "")
+    .replace(/[&<>"']/g, m => ({
       "&":"&amp;",
       "<":"&lt;",
       ">":"&gt;",
       '"':"&quot;",
       "'":"&#039;"
-    }[m])
-  );
-
-
-function msg(text){
-
-  const el =
-    document.getElementById("msg");
-
-  if(!el) return;
-
-  el.textContent =
-    text;
+    }[m]));
 
 }
 
 
-/* ==================================================
-   MODAL
-================================================== */
-
-function openModal(title, html){
-
-  document.getElementById(
-    "modalTitle"
-  ).textContent = title;
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML = html;
-
-  document.getElementById(
-    "modalBackdrop"
-  ).style.display = "flex";
-
-}
-
-
-function closeModal(){
-
-  document.getElementById(
-    "modalBackdrop"
-  ).style.display = "none";
-
-}
-
-
-/* ==================================================
+/* =====================================================
    LOGIN
-================================================== */
+===================================================== */
 
-async function login(){
+async function doLogin(){
 
   const email =
     document.getElementById(
-      "email"
+      "loginEmail"
     ).value.trim();
 
   const password =
     document.getElementById(
-      "password"
+      "loginPassword"
     ).value;
+
+  const errorBox =
+    document.getElementById(
+      "loginError"
+    );
+
+
+  errorBox.textContent = "";
+
 
   if(!email || !password){
 
-    msg(
-      "Email ও Password দিন।"
-    );
+    errorBox.textContent =
+      "Email ও Password দিন।";
 
     return;
   }
@@ -529,74 +558,76 @@ async function login(){
     error
   } =
     await db.auth.signInWithPassword({
-
       email,
       password
-
     });
 
 
   if(error){
 
-    msg(error.message);
+    errorBox.textContent =
+      error.message;
 
     return;
   }
 
 
   if(
-    data.user.email.toLowerCase() !==
-    ADMIN_EMAIL.toLowerCase()
+    !data.user ||
+    data.user.email.toLowerCase()
+      !== ADMIN_EMAIL.toLowerCase()
   ){
 
     await db.auth.signOut();
 
-    msg(
-      "এই account-এর Admin permission নেই।"
-    );
+    errorBox.textContent =
+      "এই account-এর Admin permission নেই।";
 
     return;
   }
 
 
   document.getElementById(
-    "login"
-  ).hidden = true;
+    "loginScreen"
+  ).style.display = "none";
+
 
   document.getElementById(
-    "app"
-  ).hidden = false;
+    "adminApp"
+  ).style.display = "block";
 
 
-  show("dashboard");
+  openTab("dashboard");
 
 }
 
 
-async function logout(){
+async function doLogout(){
 
   await db.auth.signOut();
 
   document.getElementById(
-    "app"
-  ).hidden = true;
+    "adminApp"
+  ).style.display = "none";
+
 
   document.getElementById(
-    "login"
-  ).hidden = false;
+    "loginScreen"
+  ).style.display = "grid";
+
 
   document.getElementById(
-    "password"
+    "loginPassword"
   ).value = "";
 
 }
 
 
-/* ==================================================
-   NAVIGATION
-================================================== */
+/* =====================================================
+   TABS
+===================================================== */
 
-function show(type, button){
+function openTab(type, button){
 
   document
     .querySelectorAll(".tab")
@@ -633,16 +664,16 @@ function show(type, button){
 }
 
 
-/* ==================================================
+/* =====================================================
    DASHBOARD
-================================================== */
+===================================================== */
 
 async function dashboardPage(){
 
   const [
-    students,
-    teachers,
-    results
+    studentRes,
+    teacherRes,
+    resultRes
   ] = await Promise.all([
 
     db
@@ -664,7 +695,7 @@ async function dashboardPage(){
     "content"
   ).innerHTML = `
 
-    <div class="box">
+    <div class="panel-box">
 
       <h2>
         Welcome TUCLC Admin 👋
@@ -681,41 +712,41 @@ async function dashboardPage(){
 
     <div class="stats">
 
-      <div class="statCard">
+      <div class="stat">
 
-        <h3>
-          ${(students.data || []).length}
-        </h3>
+        <strong>
+          ${(studentRes.data || []).length}
+        </strong>
 
-        <p>
+        <span>
           Students
-        </p>
+        </span>
 
       </div>
 
 
-      <div class="statCard">
+      <div class="stat">
 
-        <h3>
-          ${(teachers.data || []).length}
-        </h3>
+        <strong>
+          ${(teacherRes.data || []).length}
+        </strong>
 
-        <p>
+        <span>
           Teachers
-        </p>
+        </span>
 
       </div>
 
 
-      <div class="statCard">
+      <div class="stat">
 
-        <h3>
-          ${(results.data || []).length}
-        </h3>
+        <strong>
+          ${(resultRes.data || []).length}
+        </strong>
 
-        <p>
+        <span>
           Exam Results
-        </p>
+        </span>
 
       </div>
 
@@ -726,9 +757,9 @@ async function dashboardPage(){
 }
 
 
-/* ==================================================
+/* =====================================================
    STUDENTS
-================================================== */
+===================================================== */
 
 async function studentsPage(){
 
@@ -749,7 +780,7 @@ async function studentsPage(){
 
   if(error){
 
-    msg(error.message);
+    alert(error.message);
 
     return;
   }
@@ -759,7 +790,7 @@ async function studentsPage(){
     "content"
   ).innerHTML = `
 
-    <div class="box">
+    <div class="panel-box">
 
       <div
         style="
@@ -767,7 +798,7 @@ async function studentsPage(){
           justify-content:space-between;
           align-items:center;
           gap:10px;
-          margin-bottom:15px;
+          margin-bottom:18px;
         "
       >
 
@@ -778,14 +809,14 @@ async function studentsPage(){
           </h2>
 
           <div class="muted">
-            Add / Edit Student information
+            Student Add / Edit / Delete
           </div>
 
         </div>
 
         <button
-          class="btn primary"
-          onclick="studentForm()"
+          class="btn btn-blue"
+          onclick="addStudentForm()"
         >
           + Add Student
         </button>
@@ -793,7 +824,7 @@ async function studentsPage(){
       </div>
 
 
-      <div class="tablewrap">
+      <div class="table-wrap">
 
         <table>
 
@@ -801,111 +832,81 @@ async function studentsPage(){
 
             <tr>
 
-              <th>
-                নাম
-              </th>
-
-              <th>
-                Student ID
-              </th>
-
-              <th>
-                Class
-              </th>
-
-              <th>
-                Roll
-              </th>
-
-              <th>
-                বিভাগ / Batch
-              </th>
-
-              <th>
-                Guardian
-              </th>
-
-              <th>
-                Phone
-              </th>
-
-              <th>
-                Action
-              </th>
+              <th>Name</th>
+              <th>Student ID</th>
+              <th>Class</th>
+              <th>Roll</th>
+              <th>বিভাগ / Batch</th>
+              <th>Guardian</th>
+              <th>Phone</th>
+              <th>Action</th>
 
             </tr>
 
           </thead>
-
 
           <tbody>
 
             ${(data || []).map(
               x => `
 
-              <tr>
+                <tr>
 
-                <td>
-                  <strong>
-                    ${esc(x.name)}
-                  </strong>
-                </td>
+                  <td>
+                    <strong>
+                      ${esc(x.name)}
+                    </strong>
+                  </td>
 
-                <td>
-                  ${esc(x.student_id)}
-                </td>
+                  <td>
+                    ${esc(x.student_id)}
+                  </td>
 
-                <td>
-                  ${esc(x.class_name || "—")}
-                </td>
+                  <td>
+                    ${esc(x.class_name || "—")}
+                  </td>
 
-                <td>
-                  ${esc(x.roll ?? "—")}
-                </td>
+                  <td>
+                    ${esc(x.roll ?? "—")}
+                  </td>
 
-                <td>
-                  ${esc(x.batch || "—")}
-                </td>
+                  <td>
+                    ${esc(x.batch || "—")}
+                  </td>
 
-                <td>
-                  ${esc(x.guardian_name || "—")}
-                </td>
+                  <td>
+                    ${esc(x.guardian_name || "—")}
+                  </td>
 
-                <td>
-                  ${esc(x.guardian_phone || "—")}
-                </td>
+                  <td>
+                    ${esc(x.guardian_phone || "—")}
+                  </td>
 
-                <td>
+                  <td>
 
-                  <div class="actionRow">
+                    <div class="actions">
 
-                    <button
-                      class="btn small primary"
-                      onclick="editStudent('${x.id}')"
-                    >
-                      Edit
-                    </button>
+                      <button
+                        class="btn btn-small btn-blue"
+                        onclick="editStudent('${x.id}')"
+                      >
+                        Edit
+                      </button>
 
-                    <button
-                      class="btn small danger"
-                      onclick="
-                        deleteRow(
-                          'students',
-                          '${x.id}',
-                          studentsPage
-                        )
-                      "
-                    >
-                      Delete
-                    </button>
+                      <button
+                        class="btn btn-small btn-danger"
+                        onclick="deleteStudent('${x.id}')"
+                      >
+                        Delete
+                      </button>
 
-                  </div>
+                    </div>
 
-                </td>
+                  </td>
 
-              </tr>
+                </tr>
 
-            `
+              `
             ).join("")}
 
           </tbody>
@@ -921,118 +922,121 @@ async function studentsPage(){
 }
 
 
-/* ==================================================
+/* =====================================================
    ADD STUDENT
-================================================== */
+===================================================== */
 
-function studentForm(){
+function addStudentForm(){
 
   openModal(
-
     "Add Student",
-
     `
-
-      <div class="formgrid">
+      <div class="form-grid">
 
         <input
-          id="fName"
+          id="studentName"
           placeholder="শিক্ষার্থীর নাম"
         >
 
         <input
-          id="fId"
+          id="studentId"
           placeholder="Student ID"
         >
 
         <input
-          id="fClass"
+          id="studentClass"
           placeholder="Class"
         >
 
         <input
-          id="fRoll"
+          id="studentRoll"
           type="number"
           placeholder="Roll"
         >
 
         <input
-          id="fBatch"
+          id="studentBatch"
           placeholder="বিভাগ / Batch"
         >
 
         <input
-          id="fGuardian"
+          id="studentGuardian"
           placeholder="Guardian Name"
         >
 
         <input
-          id="fPhone"
+          id="studentPhone"
           placeholder="Guardian Phone"
         >
 
       </div>
 
-
       <br>
 
       <button
-        class="btn success"
+        class="btn btn-green"
         onclick="saveStudent()"
       >
         Save Student
       </button>
-
     `
-
   );
 
 }
 
 
-/* ==================================================
-   SAVE STUDENT
-================================================== */
-
 async function saveStudent(){
 
-  const name =
+  const roll =
     document.getElementById(
-      "fName"
-    ).value.trim();
-
-  const student_id =
-    document.getElementById(
-      "fId"
-    ).value.trim();
-
-  const class_name =
-    document.getElementById(
-      "fClass"
-    ).value.trim();
-
-  const rollRaw =
-    document.getElementById(
-      "fRoll"
-    ).value.trim();
-
-  const batch =
-    document.getElementById(
-      "fBatch"
-    ).value.trim();
-
-  const guardian_name =
-    document.getElementById(
-      "fGuardian"
-    ).value.trim();
-
-  const guardian_phone =
-    document.getElementById(
-      "fPhone"
+      "studentRoll"
     ).value.trim();
 
 
-  if(!name || !student_id){
+  const row = {
+
+    name:
+      document.getElementById(
+        "studentName"
+      ).value.trim(),
+
+    student_id:
+      document.getElementById(
+        "studentId"
+      ).value.trim(),
+
+    class_name:
+      document.getElementById(
+        "studentClass"
+      ).value.trim() || null,
+
+    roll:
+      roll === ""
+        ? null
+        : Number(roll),
+
+    batch:
+      document.getElementById(
+        "studentBatch"
+      ).value.trim() || null,
+
+    guardian_name:
+      document.getElementById(
+        "studentGuardian"
+      ).value.trim() || null,
+
+    guardian_phone:
+      document.getElementById(
+        "studentPhone"
+      ).value.trim() || null
+
+  };
+
+
+  if(
+    !row.name ||
+    !row.student_id
+  ){
 
     alert(
       "Student Name ও Student ID দিন।"
@@ -1040,32 +1044,6 @@ async function saveStudent(){
 
     return;
   }
-
-
-  const row = {
-
-    name,
-
-    student_id,
-
-    class_name:
-      class_name || null,
-
-    roll:
-      rollRaw === ""
-        ? null
-        : Number(rollRaw),
-
-    batch:
-      batch || null,
-
-    guardian_name:
-      guardian_name || null,
-
-    guardian_phone:
-      guardian_phone || null
-
-  };
 
 
   const {
@@ -1095,9 +1073,9 @@ async function saveStudent(){
 }
 
 
-/* ==================================================
+/* =====================================================
    EDIT STUDENT
-================================================== */
+===================================================== */
 
 async function editStudent(id){
 
@@ -1121,84 +1099,74 @@ async function editStudent(id){
 
 
   openModal(
-
     "Edit Student",
-
     `
-
-      <div class="formgrid">
+      <div class="form-grid">
 
         <input
-          id="fName"
+          id="studentName"
           value="${esc(data.name)}"
           placeholder="শিক্ষার্থীর নাম"
         >
 
         <input
-          id="fId"
+          id="studentId"
           value="${esc(data.student_id)}"
           placeholder="Student ID"
         >
 
         <input
-          id="fClass"
+          id="studentClass"
           value="${esc(data.class_name || "")}"
           placeholder="Class"
         >
 
         <input
-          id="fRoll"
+          id="studentRoll"
           type="number"
           value="${data.roll ?? ""}"
           placeholder="Roll"
         >
 
         <input
-          id="fBatch"
+          id="studentBatch"
           value="${esc(data.batch || "")}"
           placeholder="বিভাগ / Batch"
         >
 
         <input
-          id="fGuardian"
+          id="studentGuardian"
           value="${esc(data.guardian_name || "")}"
           placeholder="Guardian Name"
         >
 
         <input
-          id="fPhone"
+          id="studentPhone"
           value="${esc(data.guardian_phone || "")}"
           placeholder="Guardian Phone"
         >
 
       </div>
 
-
       <br>
 
       <button
-        class="btn success"
+        class="btn btn-green"
         onclick="updateStudent('${id}')"
       >
         Update Student
       </button>
-
     `
-
   );
 
 }
 
 
-/* ==================================================
-   UPDATE STUDENT
-================================================== */
-
 async function updateStudent(id){
 
-  const rollRaw =
+  const roll =
     document.getElementById(
-      "fRoll"
+      "studentRoll"
     ).value.trim();
 
 
@@ -1206,37 +1174,37 @@ async function updateStudent(id){
 
     name:
       document.getElementById(
-        "fName"
+        "studentName"
       ).value.trim(),
 
     student_id:
       document.getElementById(
-        "fId"
+        "studentId"
       ).value.trim(),
 
     class_name:
       document.getElementById(
-        "fClass"
+        "studentClass"
       ).value.trim() || null,
 
     roll:
-      rollRaw === ""
+      roll === ""
         ? null
-        : Number(rollRaw),
+        : Number(roll),
 
     batch:
       document.getElementById(
-        "fBatch"
+        "studentBatch"
       ).value.trim() || null,
 
     guardian_name:
       document.getElementById(
-        "fGuardian"
+        "studentGuardian"
       ).value.trim() || null,
 
     guardian_phone:
       document.getElementById(
-        "fPhone"
+        "studentPhone"
       ).value.trim() || null,
 
     updated_at:
@@ -1269,9 +1237,41 @@ async function updateStudent(id){
 }
 
 
-/* ==================================================
+async function deleteStudent(id){
+
+  if(
+    !confirm(
+      "এই Student-কে Delete করতে চান?"
+    )
+  )
+    return;
+
+
+  const {
+    error
+  } =
+    await db
+      .from("students")
+      .delete()
+      .eq("id",id);
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+
+  await studentsPage();
+
+}
+
+
+/* =====================================================
    TEACHERS
-================================================== */
+===================================================== */
 
 async function teachersPage(){
 
@@ -1292,7 +1292,7 @@ async function teachersPage(){
 
   if(error){
 
-    msg(error.message);
+    alert(error.message);
 
     return;
   }
@@ -1302,24 +1302,34 @@ async function teachersPage(){
     "content"
   ).innerHTML = `
 
-    <div class="box">
+    <div class="panel-box">
 
-      <h2>
-        👨‍🏫 Teachers
-      </h2>
-
-
-      <button
-        class="btn primary"
-        onclick="teacherForm()"
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:10px;
+        "
       >
-        + Add Teacher
-      </button>
+
+        <h2>
+          👨‍🏫 Teachers
+        </h2>
+
+        <button
+          class="btn btn-blue"
+          onclick="addTeacherForm()"
+        >
+          + Add Teacher
+        </button>
+
+      </div>
 
     </div>
 
 
-    <div class="box tablewrap">
+    <div class="panel-box table-wrap">
 
       <table>
 
@@ -1335,50 +1345,43 @@ async function teachersPage(){
 
         </thead>
 
-
         <tbody>
 
           ${(data || []).map(
-            x => `
+            t => `
 
-            <tr>
+              <tr>
 
-              <td>
-                ${esc(x.name)}
-              </td>
+                <td>
+                  ${esc(t.name)}
+                </td>
 
-              <td>
-                ${esc(x.subject || "—")}
-              </td>
+                <td>
+                  ${esc(t.subject || "—")}
+                </td>
 
-              <td>
-                ${esc(x.qualification || "—")}
-              </td>
+                <td>
+                  ${esc(t.qualification || "—")}
+                </td>
 
-              <td>
-                ${esc(x.designation || "—")}
-              </td>
+                <td>
+                  ${esc(t.designation || "—")}
+                </td>
 
-              <td>
+                <td>
 
-                <button
-                  class="btn small danger"
-                  onclick="
-                    deleteRow(
-                      'teachers',
-                      '${x.id}',
-                      teachersPage
-                    )
-                  "
-                >
-                  Delete
-                </button>
+                  <button
+                    class="btn btn-small btn-danger"
+                    onclick="deleteGeneric('teachers','${t.id}',teachersPage)"
+                  >
+                    Delete
+                  </button>
 
-              </td>
+                </td>
 
-            </tr>
+              </tr>
 
-          `
+            `
           ).join("")}
 
         </tbody>
@@ -1392,55 +1395,39 @@ async function teachersPage(){
 }
 
 
-function teacherForm(){
+function addTeacherForm(){
 
   openModal(
-
     "Add Teacher",
-
     `
+      <div class="form-grid">
 
-      <div class="formgrid">
+        <input id="teacherName"
+          placeholder="Teacher Name">
 
-        <input
-          id="tName"
-          placeholder="Teacher Name"
-        >
+        <input id="teacherSubject"
+          placeholder="Subject">
 
-        <input
-          id="tSubject"
-          placeholder="Subject"
-        >
+        <input id="teacherQualification"
+          placeholder="Qualification">
 
-        <input
-          id="tQualification"
-          placeholder="Qualification"
-        >
+        <input id="teacherDesignation"
+          placeholder="Designation">
 
-        <input
-          id="tDesignation"
-          placeholder="Designation"
-        >
-
-        <input
-          id="tPhoto"
-          placeholder="Photo URL"
-        >
+        <input id="teacherPhoto"
+          placeholder="Photo URL">
 
       </div>
-
 
       <br>
 
       <button
-        class="btn success"
+        class="btn btn-green"
         onclick="saveTeacher()"
       >
         Save Teacher
       </button>
-
     `
-
   );
 
 }
@@ -1452,27 +1439,27 @@ async function saveTeacher(){
 
     name:
       document.getElementById(
-        "tName"
+        "teacherName"
       ).value.trim(),
 
     subject:
       document.getElementById(
-        "tSubject"
+        "teacherSubject"
       ).value.trim() || null,
 
     qualification:
       document.getElementById(
-        "tQualification"
+        "teacherQualification"
       ).value.trim() || null,
 
     designation:
       document.getElementById(
-        "tDesignation"
+        "teacherDesignation"
       ).value.trim() || null,
 
     photo_url:
       document.getElementById(
-        "tPhoto"
+        "teacherPhoto"
       ).value.trim() || null
 
   };
@@ -1511,9 +1498,9 @@ async function saveTeacher(){
 }
 
 
-/* ==================================================
-   RESULTS
-================================================== */
+/* =====================================================
+   EXAM RESULTS
+===================================================== */
 
 async function resultsPage(){
 
@@ -1534,7 +1521,7 @@ async function resultsPage(){
 
   if(error){
 
-    msg(error.message);
+    alert(error.message);
 
     return;
   }
@@ -1544,23 +1531,33 @@ async function resultsPage(){
     "content"
   ).innerHTML = `
 
-    <div class="box">
+    <div class="panel-box">
 
-      <h2>
-        📊 Exam Result
-      </h2>
-
-      <button
-        class="btn primary"
-        onclick="resultForm()"
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+        "
       >
-        + Add Result
-      </button>
+
+        <h2>
+          📊 Exam Result
+        </h2>
+
+        <button
+          class="btn btn-blue"
+          onclick="addResultForm()"
+        >
+          + Add Result
+        </button>
+
+      </div>
 
     </div>
 
 
-    <div class="box tablewrap">
+    <div class="panel-box table-wrap">
 
       <table>
 
@@ -1568,134 +1565,92 @@ async function resultsPage(){
 
           <tr>
 
-            <th>
-              Student ID
-            </th>
-
-            <th>
-              Exam
-            </th>
-
-            <th>
-              Total
-            </th>
-
-            <th>
-              Obtained
-            </th>
-
-            <th>
-              %
-            </th>
-
-            <th>
-              Grade
-            </th>
-
-            <th>
-              Rank
-            </th>
-
-            <th>
-              Published
-            </th>
-
-            <th>
-              Action
-            </th>
+            <th>Student ID</th>
+            <th>Exam</th>
+            <th>Total</th>
+            <th>Obtained</th>
+            <th>%</th>
+            <th>Grade</th>
+            <th>Rank</th>
+            <th>Published</th>
+            <th>Action</th>
 
           </tr>
 
         </thead>
 
-
         <tbody>
 
           ${(data || []).map(
-            x => `
+            r => `
 
-            <tr>
+              <tr>
 
-              <td>
-                ${esc(x.student_id)}
-              </td>
+                <td>
+                  ${esc(r.student_id)}
+                </td>
 
-              <td>
-                ${esc(x.exam_name)}
-              </td>
+                <td>
+                  ${esc(r.exam_name)}
+                </td>
 
-              <td>
-                ${esc(x.total_marks ?? "—")}
-              </td>
+                <td>
+                  ${esc(r.total_marks ?? "—")}
+                </td>
 
-              <td>
-                ${esc(x.obtained_marks ?? "—")}
-              </td>
+                <td>
+                  ${esc(r.obtained_marks ?? "—")}
+                </td>
 
-              <td>
-                ${esc(x.percentage ?? "—")}%
-              </td>
+                <td>
+                  ${esc(r.percentage ?? "—")}%
+                </td>
 
-              <td>
-                ${esc(x.grade ?? "—")}
-              </td>
+                <td>
+                  ${esc(r.grade ?? "—")}
+                </td>
 
-              <td>
-                ${esc(x.rank ?? "—")}
-              </td>
+                <td>
+                  ${esc(r.rank ?? "—")}
+                </td>
 
-              <td>
-                ${
-                  x.published
-                    ? "Published"
-                    : "Hidden"
-                }
-              </td>
+                <td>
+                  ${
+                    r.published
+                      ? "Published"
+                      : "Hidden"
+                  }
+                </td>
 
-              <td>
+                <td>
 
-                <div class="actionRow">
+                  <div class="actions">
 
-                  <button
-                    class="btn small ${
-                      x.published
-                        ? "success"
-                        : ""
-                    }"
-                    onclick="
-                      toggleResult(
-                        '${x.id}',
-                        ${!x.published}
-                      )
-                    "
-                  >
-                    ${
-                      x.published
-                        ? "Unpublish"
-                        : "Publish"
-                    }
-                  </button>
+                    <button
+                      class="btn btn-small btn-green"
+                      onclick="toggleResult('${r.id}',${!r.published})"
+                    >
+                      ${
+                        r.published
+                          ? "Unpublish"
+                          : "Publish"
+                      }
+                    </button>
 
-                  <button
-                    class="btn small danger"
-                    onclick="
-                      deleteRow(
-                        'exam_results',
-                        '${x.id}',
-                        resultsPage
-                      )
-                    "
-                  >
-                    Delete
-                  </button>
+                    <button
+                      class="btn btn-small btn-danger"
+                      onclick="deleteGeneric('exam_results','${r.id}',resultsPage)"
+                    >
+                      Delete
+                    </button>
 
-                </div>
+                  </div>
 
-              </td>
+                </td>
 
-            </tr>
+              </tr>
 
-          `
+            `
           ).join("")}
 
         </tbody>
@@ -1709,92 +1664,75 @@ async function resultsPage(){
 }
 
 
-function resultForm(){
+function addResultForm(){
 
   openModal(
-
     "Publish Exam Result",
-
     `
-
-      <div class="formgrid">
+      <div class="form-grid">
 
         <input
-          id="rStudent"
+          id="resultStudent"
           placeholder="Student ID"
-          required
         >
 
         <input
-          id="rExam"
+          id="resultExam"
           placeholder="Exam Name"
-          required
         >
 
         <input
-          id="rTotal"
+          id="resultTotal"
           type="number"
           placeholder="Total Marks"
-          required
         >
 
         <input
-          id="rObtained"
+          id="resultObtained"
           type="number"
           placeholder="Obtained Marks"
-          required
         >
 
         <input
-          id="rPercentage"
-          type="number"
-          step="0.01"
-          placeholder="Percentage (optional)"
-        >
-
-        <input
-          id="rGrade"
+          id="resultGrade"
           placeholder="Grade"
         >
 
         <input
-          id="rRank"
+          id="resultRank"
           type="number"
           placeholder="Rank"
         >
 
         <input
-          id="rDate"
+          id="resultDate"
           type="date"
         >
 
         <input
-          id="rAttendance"
+          id="resultAttendance"
           type="number"
           step="0.01"
           placeholder="Attendance %"
         >
 
         <textarea
-          id="rComment"
+          id="resultComment"
           placeholder="Teacher Comment"
           class="full"
         ></textarea>
 
       </div>
 
-
       <br>
 
       <button
-        class="btn success"
+        class="btn btn-green"
         onclick="saveResult()"
       >
         Publish Result
       </button>
-
     `
-
   );
 
 }
@@ -1805,50 +1743,25 @@ async function saveResult(){
   const total =
     Number(
       document.getElementById(
-        "rTotal"
+        "resultTotal"
       ).value
     );
-
 
   const obtained =
     Number(
       document.getElementById(
-        "rObtained"
+        "resultObtained"
       ).value
     );
 
-
-  const percentageInput =
+  const rank =
     document.getElementById(
-      "rPercentage"
+      "resultRank"
     ).value.trim();
 
-
-  const percentage =
-    percentageInput === ""
-      ? (
-          total > 0
-            ? Number(
-                (
-                  obtained /
-                  total *
-                  100
-                ).toFixed(2)
-              )
-            : 0
-        )
-      : Number(percentageInput);
-
-
-  const rankInput =
+  const attendance =
     document.getElementById(
-      "rRank"
-    ).value.trim();
-
-
-  const attendanceInput =
-    document.getElementById(
-      "rAttendance"
+      "resultAttendance"
     ).value.trim();
 
 
@@ -1856,17 +1769,17 @@ async function saveResult(){
 
     student_id:
       document.getElementById(
-        "rStudent"
+        "resultStudent"
       ).value.trim(),
 
     exam_name:
       document.getElementById(
-        "rExam"
+        "resultExam"
       ).value.trim(),
 
     exam_date:
       document.getElementById(
-        "rDate"
+        "resultDate"
       ).value || null,
 
     total_marks:
@@ -1876,33 +1789,41 @@ async function saveResult(){
       obtained,
 
     percentage:
-      percentage,
+      total > 0
+        ? Number(
+            (
+              obtained /
+              total *
+              100
+            ).toFixed(2)
+          )
+        : 0,
 
     grade:
       document.getElementById(
-        "rGrade"
+        "resultGrade"
       ).value.trim() || null,
 
     rank:
-      rankInput === ""
+      rank === ""
         ? null
-        : Number(rankInput),
+        : Number(rank),
 
     attendance:
-      attendanceInput === ""
+      attendance === ""
         ? null
-        : Number(attendanceInput),
+        : Number(attendance),
 
     teacher_comment:
       document.getElementById(
-        "rComment"
+        "resultComment"
       ).value.trim() || null,
 
-    subjects:
-      [],
-
     published:
-      true
+      true,
+
+    subjects:
+      []
 
   };
 
@@ -1940,10 +1861,6 @@ async function saveResult(){
 
   await resultsPage();
 
-  alert(
-    "Exam Result published successfully."
-  );
-
 }
 
 
@@ -1958,17 +1875,11 @@ async function toggleResult(
     await db
       .from("exam_results")
       .update({
-
         published,
-
         updated_at:
           new Date().toISOString()
-
       })
-      .eq(
-        "id",
-        id
-      );
+      .eq("id",id);
 
 
   if(error){
@@ -1984,9 +1895,9 @@ async function toggleResult(
 }
 
 
-/* ==================================================
+/* =====================================================
    NOTICES
-================================================== */
+===================================================== */
 
 async function noticesPage(){
 
@@ -2007,7 +1918,7 @@ async function noticesPage(){
 
   if(error){
 
-    msg(error.message);
+    alert(error.message);
 
     return;
   }
@@ -2017,84 +1928,91 @@ async function noticesPage(){
     "content"
   ).innerHTML = `
 
-    <div class="box">
+    <div class="panel-box">
 
-      <h2>
-        📢 Notices
-      </h2>
-
-      <button
-        class="btn primary"
-        onclick="noticeForm()"
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+        "
       >
-        + Add Notice
-      </button>
+
+        <h2>
+          📢 Notices
+        </h2>
+
+        <button
+          class="btn btn-blue"
+          onclick="addNoticeForm()"
+        >
+          + Add Notice
+        </button>
+
+      </div>
 
     </div>
 
 
-    <div class="box tablewrap">
+    <div class="panel-box table-wrap">
 
       <table>
 
         <thead>
 
           <tr>
+
             <th>Date</th>
             <th>Title</th>
             <th>Description</th>
             <th>Published</th>
             <th>Action</th>
+
           </tr>
 
         </thead>
 
-
         <tbody>
 
           ${(data || []).map(
-            x => `
+            n => `
 
-            <tr>
+              <tr>
 
-              <td>
-                ${esc(x.notice_date)}
-              </td>
+                <td>
+                  ${esc(n.notice_date)}
+                </td>
 
-              <td>
-                ${esc(x.title)}
-              </td>
+                <td>
+                  ${esc(n.title)}
+                </td>
 
-              <td>
-                <span class="noticeBody">
-                  ${esc(x.body || "")}
-                </span>
-              </td>
+                <td>
+                  ${esc(n.body || "")}
+                </td>
 
-              <td>
-                ${x.published ? "Yes" : "No"}
-              </td>
+                <td>
+                  ${
+                    n.published
+                      ? "Yes"
+                      : "No"
+                  }
+                </td>
 
-              <td>
+                <td>
 
-                <button
-                  class="btn small danger"
-                  onclick="
-                    deleteRow(
-                      'notices',
-                      '${x.id}',
-                      noticesPage
-                    )
-                  "
-                >
-                  Delete
-                </button>
+                  <button
+                    class="btn btn-small btn-danger"
+                    onclick="deleteGeneric('notices','${n.id}',noticesPage)"
+                  >
+                    Delete
+                  </button>
 
-              </td>
+                </td>
 
-            </tr>
+              </tr>
 
-          `
+            `
           ).join("")}
 
         </tbody>
@@ -2108,47 +2026,41 @@ async function noticesPage(){
 }
 
 
-function noticeForm(){
+function addNoticeForm(){
 
   openModal(
-
     "Add Notice",
-
     `
-
-      <div class="formgrid">
+      <div class="form-grid">
 
         <input
-          id="nTitle"
+          id="noticeTitle"
           placeholder="Notice Title"
         >
 
         <input
-          id="nDate"
+          id="noticeDate"
           type="date"
           value="${new Date().toISOString().slice(0,10)}"
         >
 
         <textarea
-          id="nBody"
+          id="noticeBody"
           placeholder="Notice details"
           class="full"
         ></textarea>
 
       </div>
 
-
       <br>
 
       <button
-        class="btn success"
+        class="btn btn-green"
         onclick="saveNotice()"
       >
         Publish Notice
       </button>
-
     `
-
   );
 
 }
@@ -2160,17 +2072,17 @@ async function saveNotice(){
 
     title:
       document.getElementById(
-        "nTitle"
+        "noticeTitle"
       ).value.trim(),
 
     notice_date:
       document.getElementById(
-        "nDate"
+        "noticeDate"
       ).value,
 
     body:
       document.getElementById(
-        "nBody"
+        "noticeBody"
       ).value.trim(),
 
     published:
@@ -2212,9 +2124,9 @@ async function saveNotice(){
 }
 
 
-/* ==================================================
+/* =====================================================
    ADMISSIONS
-================================================== */
+===================================================== */
 
 async function admissionsPage(){
 
@@ -2235,7 +2147,7 @@ async function admissionsPage(){
 
   if(error){
 
-    msg(error.message);
+    alert(error.message);
 
     return;
   }
@@ -2245,7 +2157,7 @@ async function admissionsPage(){
     "content"
   ).innerHTML = `
 
-    <div class="box">
+    <div class="panel-box">
 
       <h2>
         📝 Online Admissions
@@ -2259,7 +2171,7 @@ async function admissionsPage(){
     </div>
 
 
-    <div class="box tablewrap">
+    <div class="panel-box table-wrap">
 
       <table>
 
@@ -2279,58 +2191,51 @@ async function admissionsPage(){
 
         </thead>
 
-
         <tbody>
 
           ${(data || []).map(
-            x => `
+            a => `
 
-            <tr>
+              <tr>
 
-              <td>
-                ${esc(x.applicant_name)}
-              </td>
+                <td>
+                  ${esc(a.applicant_name)}
+                </td>
 
-              <td>
-                ${esc(x.phone || "—")}
-              </td>
+                <td>
+                  ${esc(a.phone || "—")}
+                </td>
 
-              <td>
-                ${esc(x.class_name || "—")}
-              </td>
+                <td>
+                  ${esc(a.class_name || "—")}
+                </td>
 
-              <td>
-                ${esc(x.guardian_name || "—")}
-              </td>
+                <td>
+                  ${esc(a.guardian_name || "—")}
+                </td>
 
-              <td>
-                ${esc(x.email || "—")}
-              </td>
+                <td>
+                  ${esc(a.email || "—")}
+                </td>
 
-              <td>
-                ${esc(x.status || "pending")}
-              </td>
+                <td>
+                  ${esc(a.status || "pending")}
+                </td>
 
-              <td>
+                <td>
 
-                <button
-                  class="btn small danger"
-                  onclick="
-                    deleteRow(
-                      'admissions',
-                      '${x.id}',
-                      admissionsPage
-                    )
-                  "
-                >
-                  Delete
-                </button>
+                  <button
+                    class="btn btn-small btn-danger"
+                    onclick="deleteGeneric('admissions','${a.id}',admissionsPage)"
+                  >
+                    Delete
+                  </button>
 
-              </td>
+                </td>
 
-            </tr>
+              </tr>
 
-          `
+            `
           ).join("")}
 
         </tbody>
@@ -2344,9 +2249,9 @@ async function admissionsPage(){
 }
 
 
-/* ==================================================
+/* =====================================================
    SETTINGS
-================================================== */
+===================================================== */
 
 async function settingsPage(){
 
@@ -2363,7 +2268,7 @@ async function settingsPage(){
 
   if(error){
 
-    msg(error.message);
+    alert(error.message);
 
     return;
   }
@@ -2373,17 +2278,16 @@ async function settingsPage(){
     "content"
   ).innerHTML = `
 
-    <div class="box">
+    <div class="panel-box">
 
       <h2>
         ⚙️ Website Settings
       </h2>
 
-
-      <div class="formgrid">
+      <div class="form-grid">
 
         <input
-          id="setName"
+          id="siteName"
           value="${esc(
             data?.institution_name ||
             "The Unified Crew Learning Center"
@@ -2392,7 +2296,7 @@ async function settingsPage(){
         >
 
         <input
-          id="setPhone"
+          id="sitePhone"
           value="${esc(
             data?.phone || ""
           )}"
@@ -2400,7 +2304,7 @@ async function settingsPage(){
         >
 
         <input
-          id="setEmail"
+          id="siteEmail"
           value="${esc(
             data?.email || ""
           )}"
@@ -2408,23 +2312,22 @@ async function settingsPage(){
         >
 
         <textarea
-          id="setTag"
-          placeholder="Website tagline"
+          id="siteTagline"
           class="full"
+          placeholder="Website tagline"
         >${esc(
           data?.hero_subtitle || ""
         )}</textarea>
 
       </div>
 
-
       <br>
 
       <button
-        class="btn success"
+        class="btn btn-green"
         onclick="saveSettings()"
       >
-        Save Website Settings
+        Save Settings
       </button>
 
     </div>
@@ -2440,22 +2343,22 @@ async function saveSettings(){
 
     institution_name:
       document.getElementById(
-        "setName"
+        "siteName"
       ).value.trim(),
 
     phone:
       document.getElementById(
-        "setPhone"
+        "sitePhone"
       ).value.trim(),
 
     email:
       document.getElementById(
-        "setEmail"
+        "siteEmail"
       ).value.trim(),
 
     hero_subtitle:
       document.getElementById(
-        "setTag"
+        "siteTagline"
       ).value.trim(),
 
     updated_at:
@@ -2509,20 +2412,20 @@ async function saveSettings(){
 
 
   alert(
-    "Website settings saved."
+    "Website Settings saved."
   );
 
 }
 
 
-/* ==================================================
-   DELETE
-================================================== */
+/* =====================================================
+   GENERIC DELETE
+===================================================== */
 
-async function deleteRow(
+async function deleteGeneric(
   table,
   id,
-  reloadFunction
+  reload
 ){
 
   if(
@@ -2539,1320 +2442,6 @@ async function deleteRow(
     await db
       .from(table)
       .delete()
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await reloadFunction();
-
-}
-
-
-/* ==================================================
-   SESSION CHECK
-================================================== */
-
-async function checkSession(){
-
-  const {
-    data
-  } =
-    await db.auth.getSession();
-
-
-  if(
-    data.session &&
-    data.session.user.email.toLowerCase()
-      === ADMIN_EMAIL.toLowerCase()
-  ){
-
-    document.getElementById(
-      "login"
-    ).hidden = true;
-
-    document.getElementById(
-      "app"
-    ).hidden = false;
-
-    dashboardPage();
-
-  }
-
-}
-
-
-/* ==================================================
-   START
-================================================== */
-
-checkSession();
-
-</script>
-
-</body>
-</html><!doctype html>
-<html lang="bn">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>TUCLC Admin Panel</title>
-
-  <link rel="icon" href="assets/logo.png">
-  <link rel="stylesheet" href="style.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    body{
-      background:#f5fbfe;
-    }
-
-    .panel{
-      max-width:1200px;
-      margin:35px auto;
-      padding:0 15px 50px;
-    }
-
-    .bar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:15px;
-      background:#fff;
-      padding:18px 22px;
-      border-radius:18px;
-      box-shadow:0 8px 25px #0001;
-    }
-
-    .tabs{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin:18px 0;
-    }
-
-    .tab{
-      border:1px solid #dce8ee;
-      background:#fff;
-      padding:10px 14px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:700;
-    }
-
-    .tab.active{
-      background:#087fbe;
-      color:#fff;
-    }
-
-    .box{
-      background:#fff;
-      padding:22px;
-      border-radius:18px;
-      margin-bottom:18px;
-      box-shadow:0 5px 20px #00000008;
-    }
-
-    .formgrid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-    }
-
-    .formgrid input,
-    .formgrid textarea,
-    .formgrid select{
-      width:100%;
-      padding:11px 12px;
-      border:1px solid #d7e4ea;
-      border-radius:9px;
-      font:inherit;
-      box-sizing:border-box;
-      background:#fff;
-    }
-
-    .formgrid textarea{
-      grid-column:1/-1;
-      min-height:90px;
-      resize:vertical;
-    }
-
-    .full{
-      grid-column:1/-1;
-    }
-
-    .tablewrap{
-      overflow:auto;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:850px;
-    }
-
-    th,td{
-      padding:11px;
-      border-bottom:1px solid #e6eef2;
-      text-align:left;
-      font-size:14px;
-      vertical-align:middle;
-    }
-
-    th{
-      background:#f5fbff;
-      color:#10213b;
-    }
-
-    .danger{
-      background:#d82732!important;
-      color:white!important;
-    }
-
-    .success{
-      background:#079447!important;
-      color:white!important;
-    }
-
-    .muted{
-      color:#6b7d8b;
-      font-size:13px;
-    }
-
-    .login{
-      max-width:430px;
-      margin:12vh auto;
-      background:white;
-      padding:30px;
-      border-radius:22px;
-      box-shadow:0 15px 45px #07507818;
-      text-align:center;
-    }
-
-    .login img{
-      width:110px;
-      height:110px;
-      object-fit:contain;
-      display:block;
-      margin:auto;
-    }
-
-    .login input{
-      width:100%;
-      padding:13px;
-      margin:7px 0;
-      border:1px solid #d6e2e8;
-      border-radius:10px;
-      font:inherit;
-      box-sizing:border-box;
-    }
-
-    .msg{
-      min-height:24px;
-      color:#d82732;
-      margin-top:10px;
-    }
-
-    .modalBackdrop{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:#071b2dcc;
-      z-index:9999;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
-
-    .modalBox{
-      width:min(760px,100%);
-      max-height:90vh;
-      overflow:auto;
-      background:#fff;
-      border-radius:20px;
-      padding:24px;
-    }
-
-    .modalTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:18px;
-    }
-
-    .close{
-      border:0;
-      background:#fee2e2;
-      color:#d82732;
-      border-radius:9px;
-      width:38px;
-      height:38px;
-      font-size:22px;
-      cursor:pointer;
-    }
-
-    .actionRow{
-      display:flex;
-      gap:7px;
-      flex-wrap:wrap;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:15px;
-    }
-
-    .statCard{
-      background:linear-gradient(135deg,#fff,#eefaff);
-      border:1px solid #e3edf5;
-      border-radius:16px;
-      padding:20px;
-    }
-
-    .statCard h3{
-      margin:0;
-      font-size:30px;
-      color:#087fc1;
-    }
-
-    .noticeBody{
-      white-space:pre-wrap;
-    }
-
-    @media(max-width:700px){
-      .formgrid{
-        grid-template-columns:1fr;
-      }
-
-      .formgrid textarea,
-      .full{
-        grid-column:auto;
-      }
-
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      .bar{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<!-- =========================
-     LOGIN
-========================= -->
-
-<div id="login" class="login">
-
-  <img src="assets/logo.png" alt="TUCLC">
-
-  <h2>🔐 TUCLC Admin Login</h2>
-
-  <p>
-    শুধু অনুমোদিত Admin account ব্যবহার করুন।
-  </p>
-
-  <input
-    id="email"
-    type="email"
-    value="crewtheunified@gmail.com"
-    placeholder="Admin Email"
-  >
-
-  <input
-    id="password"
-    type="password"
-    placeholder="Password"
-  >
-
-  <button
-    class="btn red"
-    style="width:100%"
-    onclick="login()"
-  >
-    Login
-  </button>
-
-  <div id="msg" class="msg"></div>
-
-</div>
-
-
-<!-- =========================
-     ADMIN APP
-========================= -->
-
-<div id="app" class="panel" hidden>
-
-  <div class="bar">
-
-    <div>
-      <b style="font-size:18px">
-        🛠️ TUCLC Admin Panel
-      </b>
-
-      <small
-        style="display:block;color:#6b7d8b"
-      >
-        Supabase Online Database
-      </small>
-    </div>
-
-    <button
-      class="btn red"
-      onclick="logout()"
-    >
-      Logout
-    </button>
-
-  </div>
-
-
-  <!-- TABS -->
-
-  <div class="tabs">
-
-    <button
-      class="tab active"
-      onclick="show('dashboard',this)"
-    >
-      Dashboard
-    </button>
-
-    <button
-      class="tab"
-      onclick="show('students',this)"
-    >
-      Students
-    </button>
-
-    <button
-      class="tab"
-      onclick="show('teachers',this)"
-    >
-      Teachers
-    </button>
-
-    <button
-      class="tab"
-      onclick="show('results',this)"
-    >
-      Exam Result
-    </button>
-
-    <button
-      class="tab"
-      onclick="show('notices',this)"
-    >
-      Notices
-    </button>
-
-    <button
-      class="tab"
-      onclick="show('admissions',this)"
-    >
-      Admissions
-    </button>
-
-    <button
-      class="tab"
-      onclick="show('settings',this)"
-    >
-      Settings
-    </button>
-
-  </div>
-
-
-  <div id="content"></div>
-
-</div>
-
-
-<!-- =========================
-     MODAL
-========================= -->
-
-<div id="modalBackdrop" class="modalBackdrop">
-
-  <div class="modalBox">
-
-    <div class="modalTop">
-
-      <h2 id="modalTitle">
-        Form
-      </h2>
-
-      <button
-        class="close"
-        onclick="closeModal()"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div id="modalContent"></div>
-
-  </div>
-
-</div>
-
-
-<script>
-
-/* ==================================================
-   SUPABASE
-================================================== */
-
-const SUPABASE_URL =
-  "https://wdiiftvtmtvsokdgyqmr.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_RphPgkyVKZkZeIgklmt8hQ__W3aGPiX";
-
-const db =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
-
-const ADMIN_EMAIL =
-  "crewtheunified@gmail.com";
-
-
-/* ==================================================
-   HELPERS
-================================================== */
-
-const esc = (v) =>
-  String(v ?? "").replace(
-    /[&<>"']/g,
-    (m) => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    }[m])
-  );
-
-
-function msg(text){
-
-  const el =
-    document.getElementById("msg");
-
-  if(!el) return;
-
-  el.textContent =
-    text;
-
-}
-
-
-/* ==================================================
-   MODAL
-================================================== */
-
-function openModal(title, html){
-
-  document.getElementById(
-    "modalTitle"
-  ).textContent = title;
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML = html;
-
-  document.getElementById(
-    "modalBackdrop"
-  ).style.display = "flex";
-
-}
-
-
-function closeModal(){
-
-  document.getElementById(
-    "modalBackdrop"
-  ).style.display = "none";
-
-}
-
-
-/* ==================================================
-   LOGIN
-================================================== */
-
-async function login(){
-
-  const email =
-    document.getElementById(
-      "email"
-    ).value.trim();
-
-  const password =
-    document.getElementById(
-      "password"
-    ).value;
-
-  if(!email || !password){
-
-    msg(
-      "Email ও Password দিন।"
-    );
-
-    return;
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await db.auth.signInWithPassword({
-
-      email,
-      password
-
-    });
-
-
-  if(error){
-
-    msg(error.message);
-
-    return;
-  }
-
-
-  if(
-    data.user.email.toLowerCase() !==
-    ADMIN_EMAIL.toLowerCase()
-  ){
-
-    await db.auth.signOut();
-
-    msg(
-      "এই account-এর Admin permission নেই।"
-    );
-
-    return;
-  }
-
-
-  document.getElementById(
-    "login"
-  ).hidden = true;
-
-  document.getElementById(
-    "app"
-  ).hidden = false;
-
-
-  show("dashboard");
-
-}
-
-
-async function logout(){
-
-  await db.auth.signOut();
-
-  document.getElementById(
-    "app"
-  ).hidden = true;
-
-  document.getElementById(
-    "login"
-  ).hidden = false;
-
-  document.getElementById(
-    "password"
-  ).value = "";
-
-}
-
-
-/* ==================================================
-   NAVIGATION
-================================================== */
-
-function show(type, button){
-
-  document
-    .querySelectorAll(".tab")
-    .forEach(
-      x => x.classList.remove("active")
-    );
-
-
-  if(button)
-    button.classList.add("active");
-
-
-  if(type === "dashboard")
-    dashboardPage();
-
-  if(type === "students")
-    studentsPage();
-
-  if(type === "teachers")
-    teachersPage();
-
-  if(type === "results")
-    resultsPage();
-
-  if(type === "notices")
-    noticesPage();
-
-  if(type === "admissions")
-    admissionsPage();
-
-  if(type === "settings")
-    settingsPage();
-
-}
-
-
-/* ==================================================
-   DASHBOARD
-================================================== */
-
-async function dashboardPage(){
-
-  const [
-    students,
-    teachers,
-    results
-  ] = await Promise.all([
-
-    db
-      .from("students")
-      .select("id"),
-
-    db
-      .from("teachers")
-      .select("id"),
-
-    db
-      .from("exam_results")
-      .select("id")
-
-  ]);
-
-
-  document.getElementById(
-    "content"
-  ).innerHTML = `
-
-    <div class="box">
-
-      <h2>
-        Welcome TUCLC Admin 👋
-      </h2>
-
-      <p class="muted">
-        Real Online Database:
-        Supabase PostgreSQL +
-        Secure Authentication
-      </p>
-
-    </div>
-
-
-    <div class="stats">
-
-      <div class="statCard">
-
-        <h3>
-          ${(students.data || []).length}
-        </h3>
-
-        <p>
-          Students
-        </p>
-
-      </div>
-
-
-      <div class="statCard">
-
-        <h3>
-          ${(teachers.data || []).length}
-        </h3>
-
-        <p>
-          Teachers
-        </p>
-
-      </div>
-
-
-      <div class="statCard">
-
-        <h3>
-          ${(results.data || []).length}
-        </h3>
-
-        <p>
-          Exam Results
-        </p>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* ==================================================
-   STUDENTS
-================================================== */
-
-async function studentsPage(){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("students")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    msg(error.message);
-
-    return;
-  }
-
-
-  document.getElementById(
-    "content"
-  ).innerHTML = `
-
-    <div class="box">
-
-      <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          gap:10px;
-          margin-bottom:15px;
-        "
-      >
-
-        <div>
-
-          <h2 style="margin:0">
-            👨‍🎓 Students
-          </h2>
-
-          <div class="muted">
-            Add / Edit Student information
-          </div>
-
-        </div>
-
-        <button
-          class="btn primary"
-          onclick="studentForm()"
-        >
-          + Add Student
-        </button>
-
-      </div>
-
-
-      <div class="tablewrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                নাম
-              </th>
-
-              <th>
-                Student ID
-              </th>
-
-              <th>
-                Class
-              </th>
-
-              <th>
-                Roll
-              </th>
-
-              <th>
-                বিভাগ / Batch
-              </th>
-
-              <th>
-                Guardian
-              </th>
-
-              <th>
-                Phone
-              </th>
-
-              <th>
-                Action
-              </th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody>
-
-            ${(data || []).map(
-              x => `
-
-              <tr>
-
-                <td>
-                  <strong>
-                    ${esc(x.name)}
-                  </strong>
-                </td>
-
-                <td>
-                  ${esc(x.student_id)}
-                </td>
-
-                <td>
-                  ${esc(x.class_name || "—")}
-                </td>
-
-                <td>
-                  ${esc(x.roll ?? "—")}
-                </td>
-
-                <td>
-                  ${esc(x.batch || "—")}
-                </td>
-
-                <td>
-                  ${esc(x.guardian_name || "—")}
-                </td>
-
-                <td>
-                  ${esc(x.guardian_phone || "—")}
-                </td>
-
-                <td>
-
-                  <div class="actionRow">
-
-                    <button
-                      class="btn small primary"
-                      onclick="editStudent('${x.id}')"
-                    >
-                      Edit
-                    </button>
-
-                    <button
-                      class="btn small danger"
-                      onclick="
-                        deleteRow(
-                          'students',
-                          '${x.id}',
-                          studentsPage
-                        )
-                      "
-                    >
-                      Delete
-                    </button>
-
-                  </div>
-
-                </td>
-
-              </tr>
-
-            `
-            ).join("")}
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* ==================================================
-   ADD STUDENT
-================================================== */
-
-function studentForm(){
-
-  openModal(
-
-    "Add Student",
-
-    `
-
-      <div class="formgrid">
-
-        <input
-          id="fName"
-          placeholder="শিক্ষার্থীর নাম"
-        >
-
-        <input
-          id="fId"
-          placeholder="Student ID"
-        >
-
-        <input
-          id="fClass"
-          placeholder="Class"
-        >
-
-        <input
-          id="fRoll"
-          type="number"
-          placeholder="Roll"
-        >
-
-        <input
-          id="fBatch"
-          placeholder="বিভাগ / Batch"
-        >
-
-        <input
-          id="fGuardian"
-          placeholder="Guardian Name"
-        >
-
-        <input
-          id="fPhone"
-          placeholder="Guardian Phone"
-        >
-
-      </div>
-
-
-      <br>
-
-      <button
-        class="btn success"
-        onclick="saveStudent()"
-      >
-        Save Student
-      </button>
-
-    `
-
-  );
-
-}
-
-
-/* ==================================================
-   SAVE STUDENT
-================================================== */
-
-async function saveStudent(){
-
-  const name =
-    document.getElementById(
-      "fName"
-    ).value.trim();
-
-  const student_id =
-    document.getElementById(
-      "fId"
-    ).value.trim();
-
-  const class_name =
-    document.getElementById(
-      "fClass"
-    ).value.trim();
-
-  const rollRaw =
-    document.getElementById(
-      "fRoll"
-    ).value.trim();
-
-  const batch =
-    document.getElementById(
-      "fBatch"
-    ).value.trim();
-
-  const guardian_name =
-    document.getElementById(
-      "fGuardian"
-    ).value.trim();
-
-  const guardian_phone =
-    document.getElementById(
-      "fPhone"
-    ).value.trim();
-
-
-  if(!name || !student_id){
-
-    alert(
-      "Student Name ও Student ID দিন।"
-    );
-
-    return;
-  }
-
-
-  const row = {
-
-    name,
-
-    student_id,
-
-    class_name:
-      class_name || null,
-
-    roll:
-      rollRaw === ""
-        ? null
-        : Number(rollRaw),
-
-    batch:
-      batch || null,
-
-    guardian_name:
-      guardian_name || null,
-
-    guardian_phone:
-      guardian_phone || null
-
-  };
-
-
-  const {
-    error
-  } =
-    await db
-      .from("students")
-      .insert(row);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
-  await studentsPage();
-
-  alert(
-    "Student successfully added."
-  );
-
-}
-
-
-/* ==================================================
-   EDIT STUDENT
-================================================== */
-
-async function editStudent(id){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("students")
-      .select("*")
-      .eq("id",id)
-      .single();
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  openModal(
-
-    "Edit Student",
-
-    `
-
-      <div class="formgrid">
-
-        <input
-          id="fName"
-          value="${esc(data.name)}"
-          placeholder="শিক্ষার্থীর নাম"
-        >
-
-        <input
-          id="fId"
-          value="${esc(data.student_id)}"
-          placeholder="Student ID"
-        >
-
-        <input
-          id="fClass"
-          value="${esc(data.class_name || "")}"
-          placeholder="Class"
-        >
-
-        <input
-          id="fRoll"
-          type="number"
-          value="${data.roll ?? ""}"
-          placeholder="Roll"
-        >
-
-        <input
-          id="fBatch"
-          value="${esc(data.batch || "")}"
-          placeholder="বিভাগ / Batch"
-        >
-
-        <input
-          id="fGuardian"
-          value="${esc(data.guardian_name || "")}"
-          placeholder="Guardian Name"
-        >
-
-        <input
-          id="fPhone"
-          value="${esc(data.guardian_phone || "")}"
-          placeholder="Guardian Phone"
-        >
-
-      </div>
-
-
-      <br>
-
-      <button
-        class="btn success"
-        onclick="updateStudent('${id}')"
-      >
-        Update Student
-      </button>
-
-    `
-
-  );
-
-}
-
-
-/* ==================================================
-   UPDATE STUDENT
-================================================== */
-
-async function updateStudent(id){
-
-  const rollRaw =
-    document.getElementById(
-      "fRoll"
-    ).value.trim();
-
-
-  const row = {
-
-    name:
-      document.getElementById(
-        "fName"
-      ).value.trim(),
-
-    student_id:
-      document.getElementById(
-        "fId"
-      ).value.trim(),
-
-    class_name:
-      document.getElementById(
-        "fClass"
-      ).value.trim() || null,
-
-    roll:
-      rollRaw === ""
-        ? null
-        : Number(rollRaw),
-
-    batch:
-      document.getElementById(
-        "fBatch"
-      ).value.trim() || null,
-
-    guardian_name:
-      document.getElementById(
-        "fGuardian"
-      ).value.trim() || null,
-
-    guardian_phone:
-      document.getElementById(
-        "fPhone"
-      ).value.trim() || null,
-
-    updated_at:
-      new Date().toISOString()
-
-  };
-
-
-  const {
-    error
-  } =
-    await db
-      .from("students")
-      .update(row)
       .eq("id",id);
 
 
@@ -3864,1305 +2453,47 @@ async function updateStudent(id){
   }
 
 
-  closeModal();
-
-  await studentsPage();
+  await reload();
 
 }
 
 
-/* ==================================================
-   TEACHERS
-================================================== */
-
-async function teachersPage(){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("teachers")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    msg(error.message);
-
-    return;
-  }
-
-
-  document.getElementById(
-    "content"
-  ).innerHTML = `
-
-    <div class="box">
-
-      <h2>
-        👨‍🏫 Teachers
-      </h2>
-
-
-      <button
-        class="btn primary"
-        onclick="teacherForm()"
-      >
-        + Add Teacher
-      </button>
-
-    </div>
-
-
-    <div class="box tablewrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Name</th>
-            <th>Subject</th>
-            <th>Qualification</th>
-            <th>Designation</th>
-            <th>Action</th>
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${(data || []).map(
-            x => `
-
-            <tr>
-
-              <td>
-                ${esc(x.name)}
-              </td>
-
-              <td>
-                ${esc(x.subject || "—")}
-              </td>
-
-              <td>
-                ${esc(x.qualification || "—")}
-              </td>
-
-              <td>
-                ${esc(x.designation || "—")}
-              </td>
-
-              <td>
-
-                <button
-                  class="btn small danger"
-                  onclick="
-                    deleteRow(
-                      'teachers',
-                      '${x.id}',
-                      teachersPage
-                    )
-                  "
-                >
-                  Delete
-                </button>
-
-              </td>
-
-            </tr>
-
-          `
-          ).join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-function teacherForm(){
-
-  openModal(
-
-    "Add Teacher",
-
-    `
-
-      <div class="formgrid">
-
-        <input
-          id="tName"
-          placeholder="Teacher Name"
-        >
-
-        <input
-          id="tSubject"
-          placeholder="Subject"
-        >
-
-        <input
-          id="tQualification"
-          placeholder="Qualification"
-        >
-
-        <input
-          id="tDesignation"
-          placeholder="Designation"
-        >
-
-        <input
-          id="tPhoto"
-          placeholder="Photo URL"
-        >
-
-      </div>
-
-
-      <br>
-
-      <button
-        class="btn success"
-        onclick="saveTeacher()"
-      >
-        Save Teacher
-      </button>
-
-    `
-
-  );
-
-}
-
-
-async function saveTeacher(){
-
-  const row = {
-
-    name:
-      document.getElementById(
-        "tName"
-      ).value.trim(),
-
-    subject:
-      document.getElementById(
-        "tSubject"
-      ).value.trim() || null,
-
-    qualification:
-      document.getElementById(
-        "tQualification"
-      ).value.trim() || null,
-
-    designation:
-      document.getElementById(
-        "tDesignation"
-      ).value.trim() || null,
-
-    photo_url:
-      document.getElementById(
-        "tPhoto"
-      ).value.trim() || null
-
-  };
-
-
-  if(!row.name){
-
-    alert(
-      "Teacher name দিন।"
-    );
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await db
-      .from("teachers")
-      .insert(row);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
-  await teachersPage();
-
-}
-
-
-/* ==================================================
-   RESULTS
-================================================== */
-
-async function resultsPage(){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("exam_results")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    msg(error.message);
-
-    return;
-  }
-
-
-  document.getElementById(
-    "content"
-  ).innerHTML = `
-
-    <div class="box">
-
-      <h2>
-        📊 Exam Result
-      </h2>
-
-      <button
-        class="btn primary"
-        onclick="resultForm()"
-      >
-        + Add Result
-      </button>
-
-    </div>
-
-
-    <div class="box tablewrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              Student ID
-            </th>
-
-            <th>
-              Exam
-            </th>
-
-            <th>
-              Total
-            </th>
-
-            <th>
-              Obtained
-            </th>
-
-            <th>
-              %
-            </th>
-
-            <th>
-              Grade
-            </th>
-
-            <th>
-              Rank
-            </th>
-
-            <th>
-              Published
-            </th>
-
-            <th>
-              Action
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${(data || []).map(
-            x => `
-
-            <tr>
-
-              <td>
-                ${esc(x.student_id)}
-              </td>
-
-              <td>
-                ${esc(x.exam_name)}
-              </td>
-
-              <td>
-                ${esc(x.total_marks ?? "—")}
-              </td>
-
-              <td>
-                ${esc(x.obtained_marks ?? "—")}
-              </td>
-
-              <td>
-                ${esc(x.percentage ?? "—")}%
-              </td>
-
-              <td>
-                ${esc(x.grade ?? "—")}
-              </td>
-
-              <td>
-                ${esc(x.rank ?? "—")}
-              </td>
-
-              <td>
-                ${
-                  x.published
-                    ? "Published"
-                    : "Hidden"
-                }
-              </td>
-
-              <td>
-
-                <div class="actionRow">
-
-                  <button
-                    class="btn small ${
-                      x.published
-                        ? "success"
-                        : ""
-                    }"
-                    onclick="
-                      toggleResult(
-                        '${x.id}',
-                        ${!x.published}
-                      )
-                    "
-                  >
-                    ${
-                      x.published
-                        ? "Unpublish"
-                        : "Publish"
-                    }
-                  </button>
-
-                  <button
-                    class="btn small danger"
-                    onclick="
-                      deleteRow(
-                        'exam_results',
-                        '${x.id}',
-                        resultsPage
-                      )
-                    "
-                  >
-                    Delete
-                  </button>
-
-                </div>
-
-              </td>
-
-            </tr>
-
-          `
-          ).join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-function resultForm(){
-
-  openModal(
-
-    "Publish Exam Result",
-
-    `
-
-      <div class="formgrid">
-
-        <input
-          id="rStudent"
-          placeholder="Student ID"
-          required
-        >
-
-        <input
-          id="rExam"
-          placeholder="Exam Name"
-          required
-        >
-
-        <input
-          id="rTotal"
-          type="number"
-          placeholder="Total Marks"
-          required
-        >
-
-        <input
-          id="rObtained"
-          type="number"
-          placeholder="Obtained Marks"
-          required
-        >
-
-        <input
-          id="rPercentage"
-          type="number"
-          step="0.01"
-          placeholder="Percentage (optional)"
-        >
-
-        <input
-          id="rGrade"
-          placeholder="Grade"
-        >
-
-        <input
-          id="rRank"
-          type="number"
-          placeholder="Rank"
-        >
-
-        <input
-          id="rDate"
-          type="date"
-        >
-
-        <input
-          id="rAttendance"
-          type="number"
-          step="0.01"
-          placeholder="Attendance %"
-        >
-
-        <textarea
-          id="rComment"
-          placeholder="Teacher Comment"
-          class="full"
-        ></textarea>
-
-      </div>
-
-
-      <br>
-
-      <button
-        class="btn success"
-        onclick="saveResult()"
-      >
-        Publish Result
-      </button>
-
-    `
-
-  );
-
-}
-
-
-async function saveResult(){
-
-  const total =
-    Number(
-      document.getElementById(
-        "rTotal"
-      ).value
-    );
-
-
-  const obtained =
-    Number(
-      document.getElementById(
-        "rObtained"
-      ).value
-    );
-
-
-  const percentageInput =
-    document.getElementById(
-      "rPercentage"
-    ).value.trim();
-
-
-  const percentage =
-    percentageInput === ""
-      ? (
-          total > 0
-            ? Number(
-                (
-                  obtained /
-                  total *
-                  100
-                ).toFixed(2)
-              )
-            : 0
-        )
-      : Number(percentageInput);
-
-
-  const rankInput =
-    document.getElementById(
-      "rRank"
-    ).value.trim();
-
-
-  const attendanceInput =
-    document.getElementById(
-      "rAttendance"
-    ).value.trim();
-
-
-  const row = {
-
-    student_id:
-      document.getElementById(
-        "rStudent"
-      ).value.trim(),
-
-    exam_name:
-      document.getElementById(
-        "rExam"
-      ).value.trim(),
-
-    exam_date:
-      document.getElementById(
-        "rDate"
-      ).value || null,
-
-    total_marks:
-      total,
-
-    obtained_marks:
-      obtained,
-
-    percentage:
-      percentage,
-
-    grade:
-      document.getElementById(
-        "rGrade"
-      ).value.trim() || null,
-
-    rank:
-      rankInput === ""
-        ? null
-        : Number(rankInput),
-
-    attendance:
-      attendanceInput === ""
-        ? null
-        : Number(attendanceInput),
-
-    teacher_comment:
-      document.getElementById(
-        "rComment"
-      ).value.trim() || null,
-
-    subjects:
-      [],
-
-    published:
-      true
-
-  };
-
-
-  if(
-    !row.student_id ||
-    !row.exam_name
-  ){
-
-    alert(
-      "Student ID ও Exam Name দিন।"
-    );
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await db
-      .from("exam_results")
-      .insert(row);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
-  await resultsPage();
-
-  alert(
-    "Exam Result published successfully."
-  );
-
-}
-
-
-async function toggleResult(
-  id,
-  published
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(
+  title,
+  body
 ){
 
-  const {
-    error
-  } =
-    await db
-      .from("exam_results")
-      .update({
-
-        published,
-
-        updated_at:
-          new Date().toISOString()
-
-      })
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await resultsPage();
-
-}
-
-
-/* ==================================================
-   NOTICES
-================================================== */
-
-async function noticesPage(){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("notices")
-      .select("*")
-      .order(
-        "notice_date",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    msg(error.message);
-
-    return;
-  }
-
+  document.getElementById(
+    "modalTitle"
+  ).textContent = title;
 
   document.getElementById(
-    "content"
-  ).innerHTML = `
-
-    <div class="box">
-
-      <h2>
-        📢 Notices
-      </h2>
-
-      <button
-        class="btn primary"
-        onclick="noticeForm()"
-      >
-        + Add Notice
-      </button>
-
-    </div>
-
-
-    <div class="box tablewrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Published</th>
-            <th>Action</th>
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${(data || []).map(
-            x => `
-
-            <tr>
-
-              <td>
-                ${esc(x.notice_date)}
-              </td>
-
-              <td>
-                ${esc(x.title)}
-              </td>
-
-              <td>
-                <span class="noticeBody">
-                  ${esc(x.body || "")}
-                </span>
-              </td>
-
-              <td>
-                ${x.published ? "Yes" : "No"}
-              </td>
-
-              <td>
-
-                <button
-                  class="btn small danger"
-                  onclick="
-                    deleteRow(
-                      'notices',
-                      '${x.id}',
-                      noticesPage
-                    )
-                  "
-                >
-                  Delete
-                </button>
-
-              </td>
-
-            </tr>
-
-          `
-          ).join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-}
-
-
-function noticeForm(){
-
-  openModal(
-
-    "Add Notice",
-
-    `
-
-      <div class="formgrid">
-
-        <input
-          id="nTitle"
-          placeholder="Notice Title"
-        >
-
-        <input
-          id="nDate"
-          type="date"
-          value="${new Date().toISOString().slice(0,10)}"
-        >
-
-        <textarea
-          id="nBody"
-          placeholder="Notice details"
-          class="full"
-        ></textarea>
-
-      </div>
-
-
-      <br>
-
-      <button
-        class="btn success"
-        onclick="saveNotice()"
-      >
-        Publish Notice
-      </button>
-
-    `
-
-  );
-
-}
-
-
-async function saveNotice(){
-
-  const row = {
-
-    title:
-      document.getElementById(
-        "nTitle"
-      ).value.trim(),
-
-    notice_date:
-      document.getElementById(
-        "nDate"
-      ).value,
-
-    body:
-      document.getElementById(
-        "nBody"
-      ).value.trim(),
-
-    published:
-      true
-
-  };
-
-
-  if(!row.title){
-
-    alert(
-      "Notice Title দিন।"
-    );
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await db
-      .from("notices")
-      .insert(row);
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  closeModal();
-
-  await noticesPage();
-
-}
-
-
-/* ==================================================
-   ADMISSIONS
-================================================== */
-
-async function admissionsPage(){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("admissions")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-  if(error){
-
-    msg(error.message);
-
-    return;
-  }
-
+    "modalBody"
+  ).innerHTML = body;
 
   document.getElementById(
-    "content"
-  ).innerHTML = `
-
-    <div class="box">
-
-      <h2>
-        📝 Online Admissions
-      </h2>
-
-      <p class="muted">
-        Public website থেকে আসা
-        admission applications এখানে দেখা যাবে।
-      </p>
-
-    </div>
-
-
-    <div class="box tablewrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Class</th>
-            <th>Guardian</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Action</th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody>
-
-          ${(data || []).map(
-            x => `
-
-            <tr>
-
-              <td>
-                ${esc(x.applicant_name)}
-              </td>
-
-              <td>
-                ${esc(x.phone || "—")}
-              </td>
-
-              <td>
-                ${esc(x.class_name || "—")}
-              </td>
-
-              <td>
-                ${esc(x.guardian_name || "—")}
-              </td>
-
-              <td>
-                ${esc(x.email || "—")}
-              </td>
-
-              <td>
-                ${esc(x.status || "pending")}
-              </td>
-
-              <td>
-
-                <button
-                  class="btn small danger"
-                  onclick="
-                    deleteRow(
-                      'admissions',
-                      '${x.id}',
-                      admissionsPage
-                    )
-                  "
-                >
-                  Delete
-                </button>
-
-              </td>
-
-            </tr>
-
-          `
-          ).join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
+    "modal"
+  ).style.display = "flex";
 
 }
 
 
-/* ==================================================
-   SETTINGS
-================================================== */
-
-async function settingsPage(){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("site_settings")
-      .select("*")
-      .limit(1)
-      .maybeSingle();
-
-
-  if(error){
-
-    msg(error.message);
-
-    return;
-  }
-
+function closeModal(){
 
   document.getElementById(
-    "content"
-  ).innerHTML = `
-
-    <div class="box">
-
-      <h2>
-        ⚙️ Website Settings
-      </h2>
-
-
-      <div class="formgrid">
-
-        <input
-          id="setName"
-          value="${esc(
-            data?.institution_name ||
-            "The Unified Crew Learning Center"
-          )}"
-          placeholder="Institution Name"
-        >
-
-        <input
-          id="setPhone"
-          value="${esc(
-            data?.phone || ""
-          )}"
-          placeholder="Phone"
-        >
-
-        <input
-          id="setEmail"
-          value="${esc(
-            data?.email || ""
-          )}"
-          placeholder="Email"
-        >
-
-        <textarea
-          id="setTag"
-          placeholder="Website tagline"
-          class="full"
-        >${esc(
-          data?.hero_subtitle || ""
-        )}</textarea>
-
-      </div>
-
-
-      <br>
-
-      <button
-        class="btn success"
-        onclick="saveSettings()"
-      >
-        Save Website Settings
-      </button>
-
-    </div>
-
-  `;
+    "modal"
+  ).style.display = "none";
 
 }
 
 
-async function saveSettings(){
-
-  const row = {
-
-    institution_name:
-      document.getElementById(
-        "setName"
-      ).value.trim(),
-
-    phone:
-      document.getElementById(
-        "setPhone"
-      ).value.trim(),
-
-    email:
-      document.getElementById(
-        "setEmail"
-      ).value.trim(),
-
-    hero_subtitle:
-      document.getElementById(
-        "setTag"
-      ).value.trim(),
-
-    updated_at:
-      new Date().toISOString()
-
-  };
-
-
-  const {
-    data: old
-  } =
-    await db
-      .from("site_settings")
-      .select("id")
-      .limit(1)
-      .maybeSingle();
-
-
-  let result;
-
-
-  if(old){
-
-    result =
-      await db
-        .from("site_settings")
-        .update(row)
-        .eq(
-          "id",
-          old.id
-        );
-
-  }else{
-
-    result =
-      await db
-        .from("site_settings")
-        .insert(row);
-
-  }
-
-
-  if(result.error){
-
-    alert(
-      result.error.message
-    );
-
-    return;
-  }
-
-
-  alert(
-    "Website settings saved."
-  );
-
-}
-
-
-/* ==================================================
-   DELETE
-================================================== */
-
-async function deleteRow(
-  table,
-  id,
-  reloadFunction
-){
-
-  if(
-    !confirm(
-      "আপনি কি সত্যিই Delete করতে চান?"
-    )
-  )
-    return;
-
-
-  const {
-    error
-  } =
-    await db
-      .from(table)
-      .delete()
-      .eq(
-        "id",
-        id
-      );
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-  }
-
-
-  await reloadFunction();
-
-}
-
-
-/* ==================================================
-   SESSION CHECK
-================================================== */
+/* =====================================================
+   SESSION
+===================================================== */
 
 async function checkSession(){
 
@@ -5174,28 +2505,27 @@ async function checkSession(){
 
   if(
     data.session &&
+    data.session.user &&
     data.session.user.email.toLowerCase()
       === ADMIN_EMAIL.toLowerCase()
   ){
 
     document.getElementById(
-      "login"
-    ).hidden = true;
+      "loginScreen"
+    ).style.display = "none";
+
 
     document.getElementById(
-      "app"
-    ).hidden = false;
+      "adminApp"
+    ).style.display = "block";
 
-    dashboardPage();
+
+    openTab("dashboard");
 
   }
 
 }
 
-
-/* ==================================================
-   START
-================================================== */
 
 checkSession();
 
