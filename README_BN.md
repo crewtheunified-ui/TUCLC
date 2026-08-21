@@ -19,3 +19,4 @@ Supabase Dashboard → SQL Editor → `admin-setup.sql` খুলে SQL run ক
 
 ## 5) Public website
 `index.html` public homepage। `admin.html` শুধু Admin account দিয়ে ব্যবহার করা যাবে।
+TUCLC Vercel deployment connected.
