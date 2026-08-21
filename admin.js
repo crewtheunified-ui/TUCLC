@@ -295,16 +295,19 @@ async function addResult(e) {
     : 0;
 
   const row = {
-    student_id: document.getElementById("rStudent").value.trim(),
-    exam_name: document.getElementById("rExam").value.trim(),
-    total_marks: total,
-    obtained_marks: obtained,
-    percentage,
-    grade: document.getElementById("rGrade").value.trim(),
-    rank: document.getElementById("rRank").value.trim(),
-    teacher_comment: document.getElementById("rComment").value.trim(),
-    published: document.getElementById("rPublished").value === "true"
-  };
+    const rankValue = document.getElementById("rRank").value.trim();
+
+const row = {
+  student_id: document.getElementById("rStudent").value.trim(),
+  exam_name: document.getElementById("rExam").value.trim(),
+  total_marks: total,
+  obtained_marks: obtained,
+  percentage: percentage,
+  grade: document.getElementById("rGrade").value.trim() || null,
+  rank: rankValue === "" ? null : Number(rankValue),
+  teacher_comment: document.getElementById("rComment").value.trim() || null,
+  published: document.getElementById("rPublished").value === "true"
+};
 
   const { error } = await db.from("exam_results").insert(row);
 
