@@ -294,8 +294,7 @@ async function addResult(e) {
     ? Number(((obtained / total) * 100).toFixed(2))
     : 0;
 
-  const row = {
-    const rankValue = document.getElementById("rRank").value.trim();
+  const rankValue = document.getElementById("rRank").value.trim();
 
 const row = {
   student_id: document.getElementById("rStudent").value.trim(),
