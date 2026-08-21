@@ -1,406 +1,95 @@
-const SUPABASE_URL = "https://wdiiftvtmtvsokdgyqmr.supabase.co";
-const SUPABASE_KEY = "sb_publishable_RphPgkyVKZkZeIgklmt8hQ__W3aGPiX";
+const SUPABASE_URL = 'https://wdiiftvtmtvsokdgyqmr.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_RphPgkyVKZkZeIgklmt8hQ__W3aGPiX';
 
-const { createClient } = supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 const classes = [
-  "Play",
-  "Nursery",
-  "Class One",
-  "Class Two",
-  "Class Three",
-  "Class Four",
-  "Class Five",
-  "Class Six",
-  "Class Seven",
-  "Class Eight"
+  'Play',
+  'Nursery',
+  'Class One',
+  'Class Two',
+  'Class Three',
+  'Class Four',
+  'Class Five',
+  'Class Six',
+  'Class Seven',
+  'Class Eight'
 ];
 
-const esc = (s) =>
-  String(s ?? "").replace(/[&<>"']/g, (m) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
+/* =========================
+   HELPERS
+========================= */
+
+const esc = (value) =>
+  String(value ?? '').replace(/[&<>"']/g, (m) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
   }[m]));
 
-function toast(text) {
-  const x = document.getElementById("toast");
-  if (!x) return;
+function toast(message) {
+  const box = document.getElementById('toast');
 
-  x.textContent = text;
-  x.style.display = "block";
+  if (!box) {
+    alert(message);
+    return;
+  }
+
+  box.textContent = message;
+  box.style.display = 'block';
 
   clearTimeout(window.__toastTimer);
 
   window.__toastTimer = setTimeout(() => {
-    x.style.display = "none";
-  }, 2500);
+    box.style.display = 'none';
+  }, 2600);
 }
-
-const classAlias = {
-  play: "Play",
-  nursery: "Nursery",
-  one: "Class One",
-  two: "Class Two",
-  three: "Class Three",
-  four: "Class Four",
-  five: "Class Five",
-  six: "Class Six",
-  seven: "Class Seven",
-  eight: "Class Eight",
-
-  "class one": "Class One",
-  "class two": "Class Two",
-  "class three": "Class Three",
-  "class four": "Class Four",
-  "class five": "Class Five",
-  "class six": "Class Six",
-  "class seven": "Class Seven",
-  "class eight": "Class Eight"
-};
-
-function normalizeClass(value) {
-  const raw = String(value || "").trim().toLowerCase();
-  return classAlias[raw] || String(value || "").trim();
-}
-
 
 /* =========================
-   CLASS STUDENT MODAL
+   CLASS NORMALIZATION
 ========================= */
 
-function createStudentModal() {
-  if (document.getElementById("studentClassModal")) return;
+function normalizeClass(value) {
+  const x = String(value ?? '')
+    .trim()
+    .toLowerCase();
 
-  const style = document.createElement("style");
+  const map = {
+    play: 'Play',
+    nursery: 'Nursery',
 
-  style.textContent = `
-    #studentClassModal{
-      display:none;
-      position:fixed;
-      inset:0;
-      z-index:9999;
-      background:rgba(5,25,45,.72);
-      padding:20px;
-      align-items:center;
-      justify-content:center;
-    }
+    one: 'Class One',
+    'class one': 'Class One',
 
-    #studentClassModal .modalBox{
-      width:min(1000px,100%);
-      max-height:90vh;
-      overflow:auto;
-      background:#fff;
-      border-radius:22px;
-      padding:24px;
-      box-shadow:0 25px 70px rgba(0,0,0,.25);
-    }
+    two: 'Class Two',
+    'class two': 'Class Two',
 
-    #studentClassModal .modalHead{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:20px;
-    }
+    three: 'Class Three',
+    'class three': 'Class Three',
 
-    #studentClassModal h2{
-      margin:0;
-    }
+    four: 'Class Four',
+    'class four': 'Class Four',
 
-    #studentClassModal .closeBtn{
-      border:0;
-      width:40px;
-      height:40px;
-      border-radius:10px;
-      background:#fee2e2;
-      color:#d82732;
-      font-size:24px;
-      cursor:pointer;
-    }
+    five: 'Class Five',
+    'class five': 'Class Five',
 
-    #studentClassModal .countText{
-      color:#617085;
-      margin-top:5px;
-    }
+    six: 'Class Six',
+    'class six': 'Class Six',
 
-    #studentClassModal .studentTableWrap{
-      overflow:auto;
-      border:1px solid #e3edf5;
-      border-radius:15px;
-    }
+    seven: 'Class Seven',
+    'class seven': 'Class Seven',
 
-    #studentClassModal table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:620px;
-    }
+    eight: 'Class Eight',
+    'class eight': 'Class Eight'
+  };
 
-    #studentClassModal th,
-    #studentClassModal td{
-      padding:12px;
-      border-bottom:1px solid #e7eef4;
-      text-align:left;
-    }
-
-    #studentClassModal th{
-      background:#f4fbff;
-      color:#10213b;
-    }
-
-    #studentClassModal .empty{
-      text-align:center;
-      padding:35px;
-      background:#f8fcff;
-      border-radius:14px;
-      color:#617085;
-    }
-
-    .class.studentClickable{
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .class.studentClickable:hover{
-      transform:translateY(-4px);
-      box-shadow:0 12px 28px rgba(8,127,193,.12);
-    }
-
-    .classStudentCount{
-      display:block;
-      margin-top:6px;
-      font-weight:700;
-      color:#079447;
-    }
-
-    .classStudentAction{
-      display:block;
-      margin-top:4px;
-      color:#087fc1;
-      font-size:13px;
-      font-weight:700;
-    }
-  `;
-
-  document.head.appendChild(style);
-
-  const modal = document.createElement("div");
-
-  modal.id = "studentClassModal";
-
-  modal.innerHTML = `
-    <div class="modalBox">
-
-      <div class="modalHead">
-
-        <div>
-          <h2 id="studentClassTitle">শ্রেণির শিক্ষার্থী</h2>
-          <div id="studentClassCount" class="countText">
-            তথ্য লোড হচ্ছে...
-          </div>
-        </div>
-
-        <button
-          class="closeBtn"
-          onclick="closeClassStudents()"
-        >
-          ×
-        </button>
-
-      </div>
-
-      <div id="studentClassBody"></div>
-
-    </div>
-  `;
-
-  modal.addEventListener("click", function (e) {
-    if (e.target === modal) {
-      closeClassStudents();
-    }
-  });
-
-  document.body.appendChild(modal);
+  return map[x] || String(value ?? '').trim();
 }
-
-window.closeClassStudents = function () {
-
-  const modal =
-    document.getElementById("studentClassModal");
-
-  if (modal) {
-    modal.style.display = "none";
-  }
-};
-
-
-window.openClassStudents = async function (className) {
-
-  createStudentModal();
-
-  const modal =
-    document.getElementById("studentClassModal");
-
-  const title =
-    document.getElementById("studentClassTitle");
-
-  const count =
-    document.getElementById("studentClassCount");
-
-  const body =
-    document.getElementById("studentClassBody");
-
-  title.textContent =
-    `${className} — শিক্ষার্থীদের তালিকা`;
-
-  count.textContent =
-    "শিক্ষার্থীদের তথ্য লোড হচ্ছে...";
-
-  body.innerHTML = `
-    <div class="empty">
-      শিক্ষার্থীদের তথ্য লোড হচ্ছে...
-    </div>
-  `;
-
-  modal.style.display = "flex";
-
-
-  const { data, error } = await db
-    .from("students")
-    .select(
-      "student_id,name,class_name,roll,batch,photo_url"
-    )
-    .eq("class_name", className)
-    .order("roll", {
-      ascending: true,
-      nullsFirst: false
-    })
-    .order("name", {
-      ascending: true
-    });
-
-
-  let students = data || [];
-
-
-  /*
-    Existing data যদি "three", "two" ইত্যাদি
-    নামে থাকে তাহলে fallback matching।
-  */
-
-  if (!error && students.length === 0) {
-
-    const { data: allStudents } = await db
-      .from("students")
-      .select(
-        "student_id,name,class_name,roll,batch,photo_url"
-      )
-      .order("name", {
-        ascending: true
-      });
-
-    students = (allStudents || []).filter(
-      (student) =>
-        normalizeClass(student.class_name) === className
-    );
-  }
-
-
-  if (error && students.length === 0) {
-
-    count.textContent =
-      "Student information পাওয়া যায়নি";
-
-    body.innerHTML = `
-      <div class="empty">
-        শিক্ষার্থীদের তথ্য load করতে সমস্যা হয়েছে।
-      </div>
-    `;
-
-    console.error(error);
-
-    return;
-  }
-
-
-  count.textContent =
-    `মোট শিক্ষার্থী: ${students.length} জন`;
-
-
-  if (!students.length) {
-
-    body.innerHTML = `
-      <div class="empty">
-        এই শ্রেণিতে বর্তমানে কোনো শিক্ষার্থীর তথ্য নেই।
-      </div>
-    `;
-
-    return;
-  }
-
-
-  body.innerHTML = `
-
-    <div class="studentTableWrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>#</th>
-            <th>Student Name</th>
-            <th>Student ID</th>
-            <th>Roll</th>
-            <th>Batch</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          ${students.map((student, index) => `
-
-            <tr>
-
-              <td>${index + 1}</td>
-
-              <td>
-                <strong>
-                  ${esc(student.name)}
-                </strong>
-              </td>
-
-              <td>
-                ${esc(student.student_id)}
-              </td>
-
-              <td>
-                ${esc(student.roll || "—")}
-              </td>
-
-              <td>
-                ${esc(student.batch || "—")}
-              </td>
-
-            </tr>
-
-          `).join("")}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-};
-
 
 /* =========================
    CLASS GRID
@@ -409,19 +98,16 @@ window.openClassStudents = async function (className) {
 function renderClasses(students) {
 
   const grid =
-    document.getElementById("classesGrid");
+    document.getElementById('classesGrid');
 
   if (!grid) return;
 
+  const counts =
+    Object.fromEntries(
+      classes.map(c => [c, 0])
+    );
 
-  const counts = {};
-
-  classes.forEach((className) => {
-    counts[className] = 0;
-  });
-
-
-  students.forEach((student) => {
+  (students || []).forEach(student => {
 
     const className =
       normalizeClass(student.class_name);
@@ -437,37 +123,30 @@ function renderClasses(students) {
 
   });
 
+  grid.innerHTML =
+    classes.map(className => `
 
-  grid.innerHTML = classes.map((className) => `
-
-    <a
-      href="students.html?class=${encodeURIComponent(className)}"
-      class="class studentClickable"
-      style="display:block;color:inherit"
-    >
-
-      <strong>
-        ${esc(className)}
-      </strong>
-
-      <span
-        class="classStudentCount"
-        style="display:block;margin-top:6px;font-weight:700;color:var(--green)"
+      <a
+        class="class"
+        href="students.html?class=${encodeURIComponent(className)}"
       >
-        ${counts[className]} জন শিক্ষার্থী
-      </span>
 
-      <span
-        style="display:block;margin-top:4px;color:var(--blue);font-size:13px;font-weight:700"
-      >
-        শিক্ষার্থীদের তথ্য দেখতে ক্লিক করুন →
-      </span>
+        <strong>
+          ${esc(className)}
+        </strong>
 
-    </a>
+        <span>
+          ${counts[className]} জন শিক্ষার্থী
+        </span>
 
-  `).join("");
+        <small>
+          শিক্ষার্থীদের তথ্য দেখতে ক্লিক করুন →
+        </small>
+
+      </a>
+
+    `).join('');
 }
-
 
 /* =========================
    TEACHERS
@@ -476,31 +155,50 @@ function renderClasses(students) {
 function renderTeachers(teachers) {
 
   const target =
-    document.getElementById("teacherPublic");
+    document.getElementById('teacherPublic');
 
   if (!target) return;
 
-
-  if (!teachers.length) {
+  if (!teachers || !teachers.length) {
 
     target.innerHTML = `
       <div class="card">
-        <h3>শিক্ষক তথ্য শীঘ্রই প্রকাশ হবে</h3>
+        <h3>
+          শিক্ষক তথ্য শীঘ্রই প্রকাশ হবে
+        </h3>
       </div>
     `;
 
     return;
   }
 
-
   target.innerHTML =
-    teachers.map((teacher) => `
+    teachers.slice(0, 8).map(teacher => `
 
-      <div class="card">
+      <article class="card teacher-card">
 
-        <div class="teacherImg">
-          👨‍🏫
-        </div>
+        ${
+          teacher.photo_url
+            ? `
+              <img
+                src="${esc(teacher.photo_url)}"
+                alt="${esc(teacher.name)}"
+                style="
+                  width:110px;
+                  height:110px;
+                  object-fit:cover;
+                  border-radius:50%;
+                  margin:auto;
+                  display:block
+                "
+              >
+            `
+            : `
+              <div class="teacherImg">
+                👨‍🏫
+              </div>
+            `
+        }
 
         <h3>
           ${esc(teacher.name)}
@@ -509,22 +207,31 @@ function renderTeachers(teachers) {
         <p>
           <b>
             ${esc(
-              teacher.subject ||
               teacher.designation ||
-              "Teacher"
+              teacher.subject ||
+              'Teacher'
             )}
           </b>
         </p>
 
         <small>
-          ${esc(teacher.qualification || "")}
+          ${esc(teacher.qualification || '')}
         </small>
 
-      </div>
+        ${
+          teacher.bio
+            ? `
+              <p>
+                ${esc(teacher.bio)}
+              </p>
+            `
+            : ''
+        }
 
-    `).join("");
+      </article>
+
+    `).join('');
 }
-
 
 /* =========================
    NOTICES
@@ -533,12 +240,11 @@ function renderTeachers(teachers) {
 function renderNotices(notices) {
 
   const target =
-    document.getElementById("noticePublic");
+    document.getElementById('noticePublic');
 
   if (!target) return;
 
-
-  if (!notices.length) {
+  if (!notices || !notices.length) {
 
     target.innerHTML = `
       <div class="card">
@@ -551,16 +257,16 @@ function renderNotices(notices) {
     return;
   }
 
-
   target.innerHTML =
-    notices.map((notice) => `
+    notices.map(notice => `
 
-      <div class="card notice">
+      <a
+        class="card notice-card"
+        href="notice.html?id=${encodeURIComponent(notice.id)}"
+      >
 
-        <div class="date">
-          ${esc(notice.notice_date || "")}
-          <br>
-          📢
+        <div class="notice-date">
+          ${esc(notice.notice_date || '')}
         </div>
 
         <div>
@@ -570,264 +276,286 @@ function renderNotices(notices) {
           </h3>
 
           <p>
-            ${esc(notice.body || "")}
+            সম্পূর্ণ নোটিশ দেখতে ক্লিক করুন →
           </p>
 
         </div>
 
-      </div>
+      </a>
 
-    `).join("");
+    `).join('');
 }
 
-
 /* =========================
-   PUBLIC DATA LOAD
+   GALLERY
 ========================= */
 
-async function load() {
+function renderGallery(images) {
 
-  const year =
-    document.getElementById("year");
+  const target =
+    document.getElementById('galleryPublic');
 
-  if (year) {
-    year.textContent =
-      new Date().getFullYear();
-  }
+  if (!target) return;
 
+  if (!images || !images.length) {
 
-  /*
-    Students সহ সব public data
-    একসাথে load
-  */
-
-  const [
-    studentResult,
-    teacherResult,
-    noticeResult,
-    settingsResult
-  ] = await Promise.all([
-
-    db
-      .from("students")
-      .select(
-        "student_id,name,class_name,roll,batch,photo_url"
-      ),
-
-    db
-      .from("teachers")
-      .select(
-        "name,subject,qualification,designation,photo_url"
-      )
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      ),
-
-    db
-      .from("notices")
-      .select("*")
-      .eq(
-        "published",
-        true
-      )
-      .order(
-        "notice_date",
-        {
-          ascending: false
-        }
-      )
-      .limit(8),
-
-    db
-      .from("site_settings")
-      .select("*")
-      .limit(1)
-      .maybeSingle()
-
-  ]);
-
-
-  const students =
-    studentResult.data || [];
-
-  const teachers =
-    teacherResult.data || [];
-
-  const notices =
-    noticeResult.data || [];
-
-  const settings =
-    settingsResult.data;
-
-
-  if (studentResult.error) {
-    console.error(
-      "Student Load Error:",
-      studentResult.error
-    );
-  }
-
-
-  if (settings) {
-
-    const phoneText =
-      document.getElementById(
-        "phoneText"
-      );
-
-    const emailText =
-      document.getElementById(
-        "emailText"
-      );
-
-    const tagline =
-      document.getElementById(
-        "tagline"
-      );
-
-
-    if (phoneText) {
-      phoneText.textContent =
-        settings.phone ||
-        "01570-228971";
-    }
-
-    if (emailText) {
-      emailText.textContent =
-        settings.email ||
-        "crewtheunified@gmail.com";
-    }
-
-    if (tagline) {
-      tagline.textContent =
-        settings.hero_subtitle ||
-        "Play থেকে Class Eight পর্যন্ত মানসম্মত শিক্ষা, নিয়মিত পরীক্ষা, Exam Result এবং শিক্ষার্থীর সার্বিক উন্নয়নের জন্য TUCLC।";
-    }
-
-  }
-
-
-  const studentCount =
-    document.getElementById(
-      "studentCount"
-    );
-
-  const teacherCount =
-    document.getElementById(
-      "teacherCount"
-    );
-
-
-  if (studentCount) {
-    studentCount.textContent =
-      students.length + "+";
-  }
-
-
-  if (teacherCount) {
-    teacherCount.textContent =
-      teachers.length + "+";
-  }
-
-
-  /*
-    এখানেই নতুন class system
-  */
-
-  renderClasses(students);
-
-
-  renderTeachers(
-    teachers
-  );
-
-
-  renderNotices(
-    notices
-  );
-}
-
-
-/* =========================
-   EXAM RESULT SEARCH
-========================= */
-
-async function searchResult() {
-
-  const input =
-    document.getElementById(
-      "resultSearch"
-    );
-
-  const output =
-    document.getElementById(
-      "resultOut"
-    );
-
-  if (!input || !output) return;
-
-
-  const q =
-    input.value.trim();
-
-
-  if (!q) {
-
-    toast(
-      "Student ID দিন"
-    );
-
-    return;
-  }
-
-
-  output.innerHTML = `
-    <div class="card">
-      ফলাফল খোঁজা হচ্ছে...
-    </div>
-  `;
-
-
-  const { data, error } =
-    await db
-      .from("exam_results")
-      .select("*")
-      .eq(
-        "published",
-        true
-      );
-
-
-  if (error) {
-
-    output.innerHTML = `
+    target.innerHTML = `
       <div class="card">
-        Result load করতে সমস্যা হয়েছে।
+        <h3>
+          ফটো গ্যালারি শীঘ্রই যুক্ত হবে।
+        </h3>
       </div>
     `;
 
     return;
   }
 
+  target.innerHTML =
+    images.map(image => `
 
-  const result =
-    (data || []).find(
-      (x) =>
-        String(
-          x.student_id
-        ).toLowerCase() ===
-        q.toLowerCase()
+      <figure
+        class="gallery-card"
+        data-image="${esc(image.image_url)}"
+        data-title="${esc(image.title || '')}"
+      >
+
+        <img
+          src="${esc(image.image_url)}"
+          alt="${esc(image.title || 'TUCLC Gallery')}"
+          loading="lazy"
+        >
+
+        <figcaption>
+
+          <strong>
+            ${esc(image.title || '')}
+          </strong>
+
+          ${
+            image.caption
+              ? `
+                <small>
+                  ${esc(image.caption)}
+                </small>
+              `
+              : ''
+          }
+
+        </figcaption>
+
+      </figure>
+
+    `).join('');
+
+  document
+    .querySelectorAll('.gallery-card')
+    .forEach(card => {
+
+      card.addEventListener(
+        'click',
+        () => {
+          openLightbox(
+            card.dataset.image,
+            card.dataset.title
+          );
+        }
+      );
+
+    });
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+function openLightbox(src, title) {
+
+  let box =
+    document.getElementById(
+      'galleryLightbox'
     );
 
+  if (!box) {
 
-  if (!result) {
+    box =
+      document.createElement('div');
 
-    output.innerHTML = `
+    box.id =
+      'galleryLightbox';
+
+    box.innerHTML = `
+
+      <div class="lightbox-inner">
+
+        <button
+          type="button"
+          class="lightbox-close"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <img
+          id="lightboxImage"
+          alt=""
+        >
+
+        <h3
+          id="lightboxTitle"
+        ></h3>
+
+      </div>
+
+    `;
+
+    box.addEventListener(
+      'click',
+      event => {
+
+        if (
+          event.target === box ||
+          event.target.classList.contains(
+            'lightbox-close'
+          )
+        ) {
+          box.style.display = 'none';
+        }
+
+      }
+    );
+
+    document.body.appendChild(box);
+  }
+
+  box.querySelector(
+    '#lightboxImage'
+  ).src = src;
+
+  box.querySelector(
+    '#lightboxTitle'
+  ).textContent = title || '';
+
+  box.style.display = 'flex';
+}
+
+/* =========================
+   RESULT SEARCH
+========================= */
+
+async function searchResult() {
+
+  const query =
+    (
+      document.getElementById(
+        'resultSearch'
+      )?.value || ''
+    )
+      .trim()
+      .toLowerCase();
+
+  const out =
+    document.getElementById(
+      'resultOut'
+    );
+
+  if (!out) return;
+
+  if (!query) {
+
+    toast(
+      'Student ID অথবা Roll দিন।'
+    );
+
+    return;
+  }
+
+  out.innerHTML = `
+    <div class="card">
+      ফলাফল খোঁজা হচ্ছে...
+    </div>
+  `;
+
+  const [
+    studentsResult,
+    resultsResult
+  ] = await Promise.all([
+
+    supabase
+      .from('students')
+      .select(
+        'student_id,name,class_name,roll,batch'
+      ),
+
+    supabase
+      .from('exam_results')
+      .select('*')
+      .eq(
+        'published',
+        true
+      )
+      .order(
+        'exam_date',
+        {
+          ascending: false
+        }
+      )
+
+  ]);
+
+  if (
+    studentsResult.error ||
+    resultsResult.error
+  ) {
+
+    console.error(
+      studentsResult.error ||
+      resultsResult.error
+    );
+
+    out.innerHTML = `
       <div class="card">
-        এই Student ID-এর কোনো
+        ফলাফল লোড করতে সমস্যা হয়েছে।
+      </div>
+    `;
+
+    return;
+  }
+
+  const students =
+    studentsResult.data || [];
+
+  const results =
+    resultsResult.data || [];
+
+  const student =
+    students.find(
+      s =>
+        String(
+          s.student_id || ''
+        ).toLowerCase() === query ||
+
+        String(
+          s.roll || ''
+        ).toLowerCase() === query
+    );
+
+  const studentId =
+    student?.student_id || query;
+
+  const matches =
+    results.filter(
+      result =>
+        String(
+          result.student_id || ''
+        ).toLowerCase() ===
+        String(studentId).toLowerCase()
+    );
+
+  if (!matches.length) {
+
+    out.innerHTML = `
+      <div class="card">
+        এই Student ID/Roll-এর কোনো
         প্রকাশিত ফলাফল পাওয়া যায়নি।
       </div>
     `;
@@ -835,21 +563,10 @@ async function searchResult() {
     return;
   }
 
+  const latest =
+    matches[0];
 
-  const { data: student } =
-    await db
-      .from("students")
-      .select(
-        "name,class_name"
-      )
-      .eq(
-        "student_id",
-        result.student_id
-      )
-      .maybeSingle();
-
-
-  output.innerHTML = `
+  out.innerHTML = `
 
     <div class="card">
 
@@ -857,24 +574,33 @@ async function searchResult() {
         🏆
         ${esc(
           student?.name ||
-          result.student_id
+          latest.student_id
         )}
       </h3>
 
       <p>
 
-        Class:
-        ${esc(
-          student?.class_name ||
-          ""
-        )}
-
-        •
-
-        ID/Roll:
+        Student ID:
         <b>
           ${esc(
-            result.student_id
+            student?.student_id ||
+            latest.student_id
+          )}
+        </b>
+
+        • Roll:
+        <b>
+          ${esc(
+            student?.roll ||
+            '—'
+          )}
+        </b>
+
+        • Class:
+        <b>
+          ${esc(
+            student?.class_name ||
+            '—'
           )}
         </b>
 
@@ -884,8 +610,17 @@ async function searchResult() {
 
         Exam:
         <b>
-          ${esc(result.exam_name)}
+          ${esc(latest.exam_name)}
         </b>
+
+        ${
+          latest.exam_date
+            ? `
+              • Date:
+              ${esc(latest.exam_date)}
+            `
+            : ''
+        }
 
       </p>
 
@@ -894,10 +629,13 @@ async function searchResult() {
         Total:
         <b>
           ${esc(
-            result.obtained_marks || ""
-          )}/
+            latest.obtained_marks ??
+            '—'
+          )}
+          /
           ${esc(
-            result.total_marks || ""
+            latest.total_marks ??
+            '—'
           )}
         </b>
 
@@ -906,8 +644,8 @@ async function searchResult() {
         Percentage:
         <b>
           ${esc(
-            result.percentage ||
-            "—"
+            latest.percentage ??
+            '—'
           )}%
         </b>
 
@@ -916,8 +654,8 @@ async function searchResult() {
         Grade:
         <b>
           ${esc(
-            result.grade ||
-            "—"
+            latest.grade ??
+            '—'
           )}
         </b>
 
@@ -926,125 +664,451 @@ async function searchResult() {
         Rank:
         <b>
           ${esc(
-            result.rank ||
-            "—"
+            latest.rank ??
+            '—'
           )}
         </b>
 
       </p>
 
-      <p>
-        ${esc(
-          result.teacher_comment ||
-          ""
-        )}
-      </p>
+      ${
+        Array.isArray(
+          latest.subjects
+        ) &&
+        latest.subjects.length
+
+          ? `
+
+            <div class="tableWrap">
+
+              <table class="table">
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Subject
+                    </th>
+
+                    <th>
+                      Full
+                    </th>
+
+                    <th>
+                      Marks
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  ${
+                    latest.subjects
+                      .map(
+                        subject => `
+
+                          <tr>
+
+                            <td>
+                              ${esc(
+                                subject.subject
+                              )}
+                            </td>
+
+                            <td>
+                              ${esc(
+                                subject.full
+                              )}
+                            </td>
+
+                            <td>
+                              <b>
+                                ${esc(
+                                  subject.mark
+                                )}
+                              </b>
+                            </td>
+
+                          </tr>
+
+                        `
+                      )
+                      .join('')
+                  }
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+          `
+
+          : ''
+      }
+
+      ${
+        latest.teacher_comment
+          ? `
+            <p>
+              ${esc(
+                latest.teacher_comment
+              )}
+            </p>
+          `
+          : ''
+      }
+
+      ${
+        matches.length > 1
+          ? `
+
+            <hr>
+
+            <h4>
+              আগের প্রকাশিত ফলাফল
+            </h4>
+
+            ${matches
+              .slice(1)
+              .map(
+                result => `
+
+                  <p>
+
+                    <b>
+                      ${esc(
+                        result.exam_name
+                      )}
+                    </b>
+
+                    —
+                    ${esc(
+                      result.percentage ??
+                      '—'
+                    )}%
+
+                    •
+                    ${esc(
+                      result.grade ??
+                      '—'
+                    )}
+
+                  </p>
+
+                `
+              )
+              .join('')}
+
+          `
+          : ''
+      }
 
     </div>
 
   `;
 }
 
-
 /* =========================
    ADMISSION
 ========================= */
 
-async function saveAdmission() {
+function saveAdmissionForm(event) {
+
+  event.preventDefault();
 
   const form =
-    document.getElementById(
-      "admissionForm"
-    );
-
-  if (!form) return;
-
+    event.currentTarget;
 
   const formData =
     new FormData(form);
 
-
-  const data =
+  const row =
     Object.fromEntries(
       formData.entries()
     );
 
-
-  const { error } =
-    await db
-      .from("admissions")
-      .insert(data);
-
-
-  if (error) {
+  if (
+    !row.applicant_name ||
+    !row.phone ||
+    !row.class_name
+  ) {
 
     toast(
-      error.message
+      'নাম, মোবাইল ও শ্রেণি দিন।'
     );
 
     return;
   }
 
+  supabase
+    .from('admissions')
+    .insert({
 
-  form.reset();
+      applicant_name:
+        row.applicant_name.trim(),
 
-  toast(
-    "ভর্তি আবেদন সফলভাবে পাঠানো হয়েছে।"
+      class_name:
+        row.class_name.trim(),
+
+      guardian_name:
+        (
+          row.guardian_name ||
+          ''
+        ).trim() || null,
+
+      phone:
+        row.phone.trim(),
+
+      email:
+        (
+          row.email ||
+          ''
+        ).trim() || null,
+
+      message:
+        (
+          row.message ||
+          ''
+        ).trim() || null
+
+    })
+    .then(({ error }) => {
+
+      if (error) {
+
+        toast(
+          error.message
+        );
+
+        return;
+      }
+
+      form.reset();
+
+      toast(
+        'ভর্তি আবেদন সফলভাবে পাঠানো হয়েছে।'
+      );
+
+    });
+}
+
+/* =========================
+   PUBLIC DATA LOAD
+========================= */
+
+async function loadPublic() {
+
+  const year =
+    document.getElementById(
+      'year'
+    );
+
+  if (year) {
+
+    year.textContent =
+      new Date().getFullYear();
+
+  }
+
+  const [
+    settingsRes,
+    studentsRes,
+    teachersRes,
+    noticesRes,
+    galleryRes
+  ] = await Promise.all([
+
+    supabase
+      .from('site_settings')
+      .select('*')
+      .limit(1)
+      .maybeSingle(),
+
+    supabase
+      .from('students')
+      .select(
+        'student_id,name,class_name,roll,batch'
+      ),
+
+    supabase
+      .from('teachers')
+      .select('*')
+      .order(
+        'created_at',
+        {
+          ascending: false
+        }
+      )
+      .limit(8),
+
+    supabase
+      .from('notices')
+      .select('*')
+      .eq(
+        'published',
+        true
+      )
+      .order(
+        'notice_date',
+        {
+          ascending: false
+        }
+      )
+      .limit(6),
+
+    supabase
+      .from('gallery_images')
+      .select('*')
+      .order(
+        'event_date',
+        {
+          ascending: false
+        }
+      )
+      .order(
+        'created_at',
+        {
+          ascending: false
+        }
+      )
+      .limit(12)
+
+  ]);
+
+  const settings =
+    settingsRes.data;
+
+  const students =
+    studentsRes.data || [];
+
+  const teachers =
+    teachersRes.data || [];
+
+  const notices =
+    noticesRes.data || [];
+
+  const gallery =
+    galleryRes.data || [];
+
+  if (settings) {
+
+    const phone =
+      document.getElementById(
+        'phoneText'
+      );
+
+    const email =
+      document.getElementById(
+        'emailText'
+      );
+
+    const tagline =
+      document.getElementById(
+        'tagline'
+      );
+
+    if (phone) {
+
+      phone.textContent =
+        settings.phone ||
+        '01570-228971';
+
+    }
+
+    if (email) {
+
+      email.textContent =
+        settings.email ||
+        'crewtheunified@gmail.com';
+
+    }
+
+    if (tagline) {
+
+      tagline.textContent =
+        settings.hero_subtitle ||
+        'শিক্ষা, শৃঙ্খলা ও সাফল্যের পথে একসাথে';
+
+    }
+
+  }
+
+  const studentCount =
+    document.getElementById(
+      'studentCount'
+    );
+
+  const teacherCount =
+    document.getElementById(
+      'teacherCount'
+    );
+
+  if (studentCount) {
+
+    studentCount.textContent =
+      `${students.length}+`;
+
+  }
+
+  if (teacherCount) {
+
+    teacherCount.textContent =
+      `${teachers.length}+`;
+
+  }
+
+  renderClasses(
+    students
+  );
+
+  renderTeachers(
+    teachers
+  );
+
+  renderNotices(
+    notices
+  );
+
+  renderGallery(
+    gallery
   );
 }
 
-
 /* =========================
-   MENU
-========================= */
-
-function toggleMenu() {
-
-  const x =
-    document.getElementById(
-      "mobileMenu"
-    );
-
-  if (!x) return;
-
-  x.style.display =
-    x.style.display === "none"
-      ? "block"
-      : "none";
-}
-
-
-/* =========================
-   INIT
+   START
 ========================= */
 
 document.addEventListener(
-  "DOMContentLoaded",
+  'DOMContentLoaded',
   () => {
-
-    createStudentModal();
-
-    load();
 
     const admissionForm =
       document.getElementById(
-        "admissionForm"
+        'admissionForm'
       );
 
     if (admissionForm) {
 
       admissionForm.addEventListener(
-        "submit",
-        (e) => {
-
-          e.preventDefault();
-
-          saveAdmission();
-
-        }
+        'submit',
+        saveAdmissionForm
       );
 
     }
+
+    loadPublic()
+      .catch(error => {
+
+        console.error(
+          'TUCLC load error:',
+          error
+        );
+
+      });
 
   }
 );
