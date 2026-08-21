@@ -440,25 +440,30 @@ function renderClasses(students) {
 
   grid.innerHTML = classes.map((className) => `
 
-    <button
-      type="button"
+    <a
+      href="students.html?class=${encodeURIComponent(className)}"
       class="class studentClickable"
-      onclick="openClassStudents(${JSON.stringify(className)})"
+      style="display:block;color:inherit"
     >
 
       <strong>
         ${esc(className)}
       </strong>
 
-      <span class="classStudentCount">
+      <span
+        class="classStudentCount"
+        style="display:block;margin-top:6px;font-weight:700;color:var(--green)"
+      >
         ${counts[className]} জন শিক্ষার্থী
       </span>
 
-      <span class="classStudentAction">
+      <span
+        style="display:block;margin-top:4px;color:var(--blue);font-size:13px;font-weight:700"
+      >
         শিক্ষার্থীদের তথ্য দেখতে ক্লিক করুন →
       </span>
 
-    </button>
+    </a>
 
   `).join("");
 }
