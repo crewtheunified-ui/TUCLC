@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <title>TUCLC Students</title>
+
   <link rel="icon" href="assets/logo.png">
   <link rel="stylesheet" href="style.css">
 
@@ -44,7 +46,7 @@
     .studentTable{
       width:100%;
       border-collapse:collapse;
-      min-width:700px;
+      min-width:750px;
     }
 
     .studentTable th,
@@ -98,9 +100,11 @@
         <img
           src="assets/logo.png"
           style="width:65px;height:65px;object-fit:contain"
+          alt="TUCLC Logo"
         >
 
         <div>
+
           <h1 id="classTitle">
             শিক্ষার্থীদের তালিকা
           </h1>
@@ -108,6 +112,7 @@
           <p id="classCount">
             তথ্য লোড হচ্ছে...
           </p>
+
         </div>
 
       </div>
@@ -154,6 +159,7 @@ const db =
 const aliases = {
 
   "play":"Play",
+
   "nursery":"Nursery",
 
   "one":"Class One",
@@ -199,14 +205,12 @@ function normalizeClass(value){
 function esc(value){
 
   return String(value ?? "")
-    .replace(/[&<>"']/g,m => ({
-
+    .replace(/[&<>"']/g, m => ({
       "&":"&amp;",
       "<":"&lt;",
       ">":"&gt;",
       '"':"&quot;",
       "'":"&#039;"
-
     }[m]));
 
 }
@@ -234,25 +238,31 @@ async function loadStudents(){
     `${className} — শিক্ষার্থীদের তালিকা`;
 
 
-  const {
-    data,
-    error
-  } = await db
-    .from("students")
-    .select(
-      "student_id,name,class_name,roll,batch"
-    )
-    .order(
-      "name",
-      {
-        ascending:true
-      }
-    );
+  const { data, error } =
+    await db
+      .from("students")
+      .select(
+        "student_id,name,class_name,roll,batch"
+      )
+      .order(
+        "name",
+        {
+          ascending:true
+        }
+      );
 
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Student query error:",
+      error
+    );
+
+    document.getElementById(
+      "classCount"
+    ).textContent =
+      "তথ্য load করা যায়নি";
 
     document.getElementById(
       "studentContent"
@@ -260,15 +270,20 @@ async function loadStudents(){
 
       <div class="studentEmpty">
 
-        শিক্ষার্থীদের তথ্য
-        পাওয়া যাচ্ছে না।
+        <h3>
+          শিক্ষার্থীদের তথ্য
+          পাওয়া যাচ্ছে না।
+        </h3>
+
+        <p>
+          Database query error হয়েছে।
+        </p>
 
       </div>
 
     `;
 
     return;
-
   }
 
 
@@ -310,7 +325,6 @@ async function loadStudents(){
     `;
 
     return;
-
   }
 
 
@@ -323,52 +337,77 @@ async function loadStudents(){
       <table class="studentTable">
 
         <thead>
-  <tr>
-    <th class="studentNo">#</th>
-    <th>শিক্ষার্থীর নাম</th>
-    <th>Student ID</th>
-    <th>Class</th>
-    <th>Roll</th>
-    <th>Batch</th>
-  </tr>
-</thead>
 
+          <tr>
+
+            <th class="studentNo">
+              #
+            </th>
+
+            <th>
+              শিক্ষার্থীর নাম
+            </th>
+
+            <th>
+              Student ID
+            </th>
+
+            <th>
+              Class
+            </th>
+
+            <th>
+              Roll
+            </th>
+
+            <th>
+              Batch
+            </th>
+
+          </tr>
+
+        </thead>
 
         <tbody>
 
-         .select(
-  "student_id,name,class_name,roll,batch"
-) `
+          ${students.map(
+            (student,index) => `
 
             <tr>
 
-  <td class="studentNo">
-    ${index + 1}
-  </td>
+              <td class="studentNo">
+                ${index + 1}
+              </td>
 
-  <td>
-    <strong>
-      ${esc(student.name)}
-    </strong>
-  </td>
+              <td>
+                <strong>
+                  ${esc(student.name)}
+                </strong>
+              </td>
 
-  <td>
-    ${esc(student.student_id)}
-  </td>
+              <td>
+                ${esc(student.student_id)}
+              </td>
 
-  <td>
-    ${esc(student.class_name || "—")}
-  </td>
+              <td>
+                ${esc(
+                  student.class_name || "—"
+                )}
+              </td>
 
-  <td>
-    ${esc(student.roll || "—")}
-  </td>
+              <td>
+                ${esc(
+                  student.roll || "—"
+                )}
+              </td>
 
-  <td>
-    ${esc(student.batch || "—")}
-  </td>
+              <td>
+                ${esc(
+                  student.batch || "—"
+                )}
+              </td>
 
-</tr>
+            </tr>
 
           `
           ).join("")}
