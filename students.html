@@ -323,32 +323,15 @@ async function loadStudents(){
       <table class="studentTable">
 
         <thead>
-
-          <tr>
-
-            <th class="studentNo">
-              #
-            </th>
-
-            <th>
-              শিক্ষার্থীর নাম
-            </th>
-
-            <th>
-              Student ID
-            </th>
-
-            <th>
-              Roll
-            </th>
-
-            <th>
-              Batch
-            </th>
-
-          </tr>
-
-        </thead>
+  <tr>
+    <th class="studentNo">#</th>
+    <th>শিক্ষার্থীর নাম</th>
+    <th>Student ID</th>
+    <th>Class</th>
+    <th>Roll</th>
+    <th>Batch</th>
+  </tr>
+</thead>
 
 
         <tbody>
@@ -358,33 +341,33 @@ async function loadStudents(){
 
             <tr>
 
-              <td class="studentNo">
-                ${index + 1}
-              </td>
+  <td class="studentNo">
+    ${index + 1}
+  </td>
 
-              <td>
-                <strong>
-                  ${esc(student.name)}
-                </strong>
-              </td>
+  <td>
+    <strong>
+      ${esc(student.name)}
+    </strong>
+  </td>
 
-              <td>
-                ${esc(student.student_id)}
-              </td>
+  <td>
+    ${esc(student.student_id)}
+  </td>
 
-              <td>
-                ${esc(
-                  student.roll || "—"
-                )}
-              </td>
+  <td>
+    ${esc(student.class_name || "—")}
+  </td>
 
-              <td>
-                ${esc(
-                  student.batch || "—"
-                )}
-              </td>
+  <td>
+    ${esc(student.roll || "—")}
+  </td>
 
-            </tr>
+  <td>
+    ${esc(student.batch || "—")}
+  </td>
+
+</tr>
 
           `
           ).join("")}
