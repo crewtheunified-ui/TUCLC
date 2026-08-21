@@ -336,8 +336,9 @@ async function loadStudents(){
 
         <tbody>
 
-          ${students.map(
-            (student,index) => `
+         .select(
+  "student_id,name,class_name,roll,batch"
+) `
 
             <tr>
 
