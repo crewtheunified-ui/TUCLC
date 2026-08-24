@@ -108,16 +108,51 @@ async function bulkResultForm(){
     <div id="bulkResultArea"></div>`);
 }
 
+function dbClassNames(className){
+  const map={
+    'Play':['Play','PLAY','play'],
+    'Nursery':['Nursery','NURSERY','nursery'],
+    'Class One':['One','Class One','ONE','class one'],
+    'Class Two':['Two','Class Two','TWO','class two'],
+    'Class Three':['Three','Class Three','THREE','class three'],
+    'Class Four':['Four','Class Four','FOUR','class four'],
+    'Class Five':['Five','Class Five','FIVE','class five'],
+    'Class Six':['Six','Class Six','SIX','class six'],
+    'Class Seven':['Seven','Class Seven','SEVEN','class seven'],
+    'Class Eight':['Eight','Class Eight','EIGHT','class eight']
+  };
+  return map[className] || [className];
+}
+
+async function getStudentsForClass(className){
+  const {data,error}=await db.from('students').select('student_id,name,roll,batch,class_name');
+  if(error) throw error;
+  const aliases=dbClassNames(className).map(v=>String(v).trim().toLowerCase().replace(/^class\s+/,''));
+  return (data||[]).filter(student=>{
+    const raw=String(student.class_name||'').trim().toLowerCase();
+    const normalized=raw.replace(/^class\s+/,'');
+    return aliases.includes(raw) || aliases.includes(normalized);
+  }).sort((a,b)=>{
+    const ar=parseInt(a.roll,10), br=parseInt(b.roll,10);
+    const an=Number.isFinite(ar)?ar:999999, bn=Number.isFinite(br)?br:999999;
+    if(an!==bn) return an-bn;
+    return String(a.name||'').localeCompare(String(b.name||''));
+  });
+}
+
 async function loadBulkStudents(){
   const className=bulkClass.value.trim(), examName=bulkExam.value.trim();
   if(!className||!examName)return alert('Class ও Exam Name দিন।');
-  const {data,error}=await db.from('students').select('student_id,name,roll,batch,class_name').eq('class_name',className).order('roll',{ascending:true,nullsFirst:false}).order('name',{ascending:true});
-  if(error)return alert(error.message);
-  const students=data||[];
-  if(!students.length){
-    bulkResultArea.innerHTML='<div class="bulkHint">এই class-এ কোনো student পাওয়া যায়নি।</div>';return;
+  try{
+    const students=await getStudentsForClass(className);
+    if(!students.length){
+      bulkResultArea.innerHTML='<div class="bulkHint">এই class-এ কোনো student পাওয়া যায়নি।</div>';return;
+    }
+    renderBulkRows(students,{});
+  }catch(error){
+    console.error(error);
+    alert(error.message||'Student data load করা যায়নি।');
   }
-  renderBulkRows(students,{});
 }
 
 function renderBulkRows(students,prefill){
@@ -125,12 +160,12 @@ function renderBulkRows(students,prefill){
     <div class="bulkHint" style="margin:12px 0">মোট ${students.length} জন student। নিচে marks বসান। তারপর <b>Publish All</b> চাপুন।</div>
     <div class="tableWrap">
       <table class="bulkTable">
-        <thead><tr><th>#</th><th>Student</th><th>ID</th><th>Roll</th><th>Total</th><th>Obtained</th><th>%</th><th>Grade</th><th>Rank</th><th>Attendance</th><th>Comment</th></tr></thead>
+        <thead><tr><th>#</th><th>Student</th><th>ID</th><th>Class</th><th>Roll</th><th>Total</th><th>Obtained</th><th>%</th><th>Grade</th><th>Rank</th><th>Attendance</th><th>Comment</th></tr></thead>
         <tbody>
           ${students.map((s,i)=>{
             const v=prefill[s.student_id]||{};
             return `<tr data-sid="${esc(s.student_id)}">
-              <td>${i+1}</td><td><strong>${esc(s.name)}</strong></td><td>${esc(s.student_id)}</td><td>${esc(s.roll||'—')}</td>
+              <td>${i+1}</td><td><strong>${esc(s.name)}</strong></td><td>${esc(s.student_id)}</td><td>${esc(s.class_name||'—')}</td><td>${esc(s.roll||'—')}</td>
               <td><input class="bTotal" type="number" value="${esc(v.total??'')}" placeholder="100"></td>
               <td><input class="bObtained" type="number" value="${esc(v.obtained??'')}" placeholder="0"></td>
               <td><input class="bPercentage" type="number" step="0.01" value="${esc(v.percentage??'')}" readonly></td>
@@ -191,11 +226,14 @@ async function importBulkCsv(event){
   });
   const className=bulkClass.value.trim();
   if(!className)return alert('CSV import-এর আগে Class নির্বাচন করুন।');
-  const {data,error}=await db.from('students').select('student_id,name,roll,batch,class_name').eq('class_name',className).order('roll',{ascending:true,nullsFirst:false}).order('name',{ascending:true});
-  if(error)return alert(error.message);
-  const students=data||[];
-  if(!students.length)return alert('এই class-এ কোনো student নেই।');
-  renderBulkRows(students,prefill);
+  try{
+    const students=await getStudentsForClass(className);
+    if(!students.length)return alert('এই class-এ কোনো student নেই।');
+    renderBulkRows(students,prefill);
+  }catch(error){
+    console.error(error);
+    alert(error.message||'Student data load করা যায়নি।');
+  }
 }
 
 async function publishBulkResults(){
