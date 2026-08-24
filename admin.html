@@ -1,5 +1,5 @@
 <!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TUCLC Admin Panel</title><link rel="icon" href="assets/logo.png"><link rel="stylesheet" href="style.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
-body{background:#f5fbfe}.admin-wrap{width:min(1250px,94%);margin:25px auto 60px}.loginScreen{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#e9f9ff,#fff0f7)}.loginBox{width:min(430px,100%);background:#fff;padding:30px;border-radius:24px;box-shadow:0 20px 55px #0002;text-align:center}.loginBox img{width:110px}.loginBox input,.formGrid input,.formGrid textarea,.formGrid select{width:100%;box-sizing:border-box;padding:12px;border:1px solid #d6e3ea;border-radius:10px;font:inherit}.loginBox input{margin:7px 0}.topbar{background:#fff;padding:18px 22px;border-radius:18px;display:flex;justify-content:space-between;align-items:center;gap:15px;box-shadow:0 8px 25px #0000000d}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.tab{border:1px solid #d8e4ea;background:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.tab.active{background:#087fc1;color:#fff}.box{background:#fff;padding:22px;border-radius:18px;margin-bottom:18px;box-shadow:0 8px 25px #00000008}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.stat{background:linear-gradient(135deg,#fff,#effaff);padding:20px;border-radius:16px;border:1px solid #e4edf2}.stat b{display:block;font-size:30px;color:#087fc1}.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.formGrid textarea{grid-column:1/-1;min-height:100px}.full{grid-column:1/-1}.tableWrap{overflow:auto}.dataTable{width:100%;min-width:1000px;border-collapse:collapse}.dataTable th,.dataTable td{padding:11px;border-bottom:1px solid #e5edf2;text-align:left;vertical-align:top}.dataTable th{background:#f3fbff}.actions{display:flex;gap:6px;flex-wrap:wrap}.btn2{border:0;border-radius:9px;padding:8px 11px;cursor:pointer;font:600 13px inherit}.blue{background:#087fc1;color:#fff}.green{background:#079447;color:#fff}.red2{background:#d82732;color:#fff}.gray{background:#eef3f6;color:#10213b}.orange{background:#e78b00;color:#fff}.status{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700}.pending{background:#fff4cc;color:#8a6500}.accepted{background:#dff7e8;color:#08783b}.cancelled{background:#fee2e2;color:#b42318}.modal{display:none;position:fixed;inset:0;z-index:9999;background:#071b2dcc;align-items:center;justify-content:center;padding:16px}.modalBox{width:min(780px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:24px}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:15px}.close{border:0;width:38px;height:38px;border-radius:10px;background:#fee2e2;color:#b42318;font-size:23px;cursor:pointer}.photoPreview{width:110px;height:110px;object-fit:cover;border-radius:50%;background:#effaff}.galleryPreview{width:100%;height:180px;object-fit:cover;border-radius:12px}.galleryGridAdmin{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.galleryAdminCard{border:1px solid #e2ebf0;padding:10px;border-radius:14px;background:#fff}.muted{color:#64748b;font-size:13px}@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.formGrid{grid-template-columns:1fr}.galleryGridAdmin{grid-template-columns:1fr 1fr}}@media(max-width:520px){.stats{grid-template-columns:1fr}.galleryGridAdmin{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
+body{background:#f5fbfe}.admin-wrap{width:min(1250px,94%);margin:25px auto 60px}.loginScreen{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#e9f9ff,#fff0f7)}.loginBox{width:min(430px,100%);background:#fff;padding:30px;border-radius:24px;box-shadow:0 20px 55px #0002;text-align:center}.loginBox img{width:110px}.loginBox input,.formGrid input,.formGrid textarea,.formGrid select{width:100%;box-sizing:border-box;padding:12px;border:1px solid #d6e3ea;border-radius:10px;font:inherit}.loginBox input{margin:7px 0}.topbar{background:#fff;padding:18px 22px;border-radius:18px;display:flex;justify-content:space-between;align-items:center;gap:15px;box-shadow:0 8px 25px #0000000d}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.tab{border:1px solid #d8e4ea;background:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.tab.active{background:#087fc1;color:#fff}.box{background:#fff;padding:22px;border-radius:18px;margin-bottom:18px;box-shadow:0 8px 25px #00000008}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.stat{background:linear-gradient(135deg,#fff,#effaff);padding:20px;border-radius:16px;border:1px solid #e4edf2}.stat b{display:block;font-size:30px;color:#087fc1}.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.formGrid textarea{grid-column:1/-1;min-height:100px}.full{grid-column:1/-1}.tableWrap{overflow:auto}.dataTable{width:100%;min-width:1000px;border-collapse:collapse}.dataTable th,.dataTable td{padding:11px;border-bottom:1px solid #e5edf2;text-align:left;vertical-align:top}.dataTable th{background:#f3fbff}.actions{display:flex;gap:6px;flex-wrap:wrap}.btn2{border:0;border-radius:9px;padding:8px 11px;cursor:pointer;font:600 13px inherit}.blue{background:#087fc1;color:#fff}.green{background:#079447;color:#fff}.red2{background:#d82732;color:#fff}.gray{background:#eef3f6;color:#10213b}.orange{background:#e78b00;color:#fff}.bulkGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.bulkActions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.bulkTable{width:100%;min-width:1200px;border-collapse:collapse}.bulkTable th,.bulkTable td{padding:9px;border-bottom:1px solid #e5edf2;text-align:left;vertical-align:middle}.bulkTable input,.bulkTable select{width:100%;box-sizing:border-box;padding:8px;border:1px solid #d6e3ea;border-radius:8px;font:inherit}.bulkHint{padding:10px 12px;border-radius:10px;background:#effaff;color:#0b577d;font-size:13px}.bulkError{color:#b42318;font-size:13px}.bulkOk{color:#08783b;font-size:13px}.orange{background:#e78b00;color:#fff}.status{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700}.pending{background:#fff4cc;color:#8a6500}.accepted{background:#dff7e8;color:#08783b}.cancelled{background:#fee2e2;color:#b42318}.modal{display:none;position:fixed;inset:0;z-index:9999;background:#071b2dcc;align-items:center;justify-content:center;padding:16px}.modalBox{width:min(780px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:24px}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:15px}.close{border:0;width:38px;height:38px;border-radius:10px;background:#fee2e2;color:#b42318;font-size:23px;cursor:pointer}.photoPreview{width:110px;height:110px;object-fit:cover;border-radius:50%;background:#effaff}.galleryPreview{width:100%;height:180px;object-fit:cover;border-radius:12px}.galleryGridAdmin{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.galleryAdminCard{border:1px solid #e2ebf0;padding:10px;border-radius:14px;background:#fff}.muted{color:#64748b;font-size:13px}@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.formGrid,.bulkGrid{grid-template-columns:1fr}.galleryGridAdmin{grid-template-columns:1fr 1fr}}@media(max-width:520px){.stats{grid-template-columns:1fr}.galleryGridAdmin{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
 </style></head><body>
 <section id="loginScreen" class="loginScreen"><div class="loginBox"><img src="assets/logo.png" alt="TUCLC"><h2>🔐 TUCLC Admin Login</h2><p>শুধু অনুমোদিত Admin account ব্যবহার করুন।</p><input id="email" type="email" value="crewtheunified@gmail.com"><input id="password" type="password" placeholder="Password"><button class="btn red2" style="width:100%;padding:12px" onclick="login()">Login</button><div id="loginError" class="muted" style="margin-top:10px;color:#d82732"></div></div></section>
 <section id="adminApp" class="admin-wrap" style="display:none"><div class="topbar"><div><h2 style="margin:0">🛠️ TUCLC Admin Panel</h2><small class="muted">Students • Results • Admissions • Teachers • Notices • Gallery</small></div><button class="btn2 red2" onclick="logout()">Logout</button></div><div class="tabs"><button class="tab active" onclick="openTab('dashboard',this)">Dashboard</button><button class="tab" onclick="openTab('students',this)">Students</button><button class="tab" onclick="openTab('teachers',this)">Teachers</button><button class="tab" onclick="openTab('results',this)">Exam Result</button><button class="tab" onclick="openTab('admissions',this)">Online Admissions</button><button class="tab" onclick="openTab('notices',this)">Notices</button><button class="tab" onclick="openTab('gallery',this)">Photo Gallery</button><button class="tab" onclick="openTab('settings',this)">Settings</button></div><div id="content"></div></section>
@@ -21,9 +21,211 @@ async function teachersPage(){const {data,error}=await db.from('teachers').selec
 function teacherForm(data={}){openModal(data.id?'Edit Teacher':'Add Teacher',`<div class="formGrid"><input id="tName" placeholder="Teacher Name" value="${esc(data.name||'')}"><input id="tSubject" placeholder="Subject" value="${esc(data.subject||'')}"><input id="tDesignation" placeholder="Designation" value="${esc(data.designation||'')}"><input id="tQualification" placeholder="Qualification" value="${esc(data.qualification||'')}"><textarea id="tBio" class="full" placeholder="Short Bio">${esc(data.bio||'')}</textarea><div class="full"><label><b>Teacher Photo (JPG/PNG, max 2MB)</b></label><input id="tPhoto" type="file" accept="image/jpeg,image/png"></div>${data.photo_url?`<div class="full"><img src="${esc(data.photo_url)}" class="photoPreview"><input type="hidden" id="tExistingPhoto" value="${esc(data.photo_url)}"></div>`:''}</div><br><button class="btn2 green" onclick="saveTeacher(${data.id?`'${data.id}'`:null})">Save Teacher</button>`)}
 async function saveTeacher(id=null){const file=tPhoto.files[0];let photoUrl=document.getElementById('tExistingPhoto')?.value||null;if(file){if(file.size>2097152)return alert('ছবির size 2MB-এর বেশি হতে পারবে না।');const ext=file.type==='image/png'?'png':'jpg';const path=`${crypto.randomUUID()}.${ext}`;const {error}=await db.storage.from('teacher_photos').upload(path,file,{contentType:file.type,upsert:false});if(error)return alert(error.message);photoUrl=db.storage.from('teacher_photos').getPublicUrl(path).data.publicUrl}const row={name:tName.value.trim(),subject:tSubject.value.trim()||null,designation:tDesignation.value.trim()||null,qualification:tQualification.value.trim()||null,bio:tBio.value.trim()||null,photo_url:photoUrl,updated_at:new Date().toISOString()};if(!row.name)return alert('Teacher name দিন।');const res=id?await db.from('teachers').update(row).eq('id',id):await db.from('teachers').insert(row);if(res.error)return alert(res.error.message);closeModal();teachersPage()}
 async function editTeacher(id){const {data,error}=await db.from('teachers').select('*').eq('id',id).single();if(error)return alert(error.message);teacherForm(data)}
-async function resultsPage(){const {data,error}=await db.from('exam_results').select('*').order('created_at',{ascending:false});if(error)return alert(error.message);content.innerHTML=`<div class="box"><div style="display:flex;justify-content:space-between;align-items:center"><div><h2 style="margin:0">📊 Exam Result</h2><div class="muted">Publish / Unpublish এবং result details</div></div><button class="btn2 blue" onclick="resultForm()">+ Add Result</button></div></div><div class="box tableWrap"><table class="dataTable"><thead><tr><th>Student ID</th><th>Exam</th><th>Total</th><th>Obtained</th><th>%</th><th>Grade</th><th>Rank</th><th>Status</th><th>Action</th></tr></thead><tbody>${(data||[]).map(r=>`<tr><td>${esc(r.student_id)}</td><td>${esc(r.exam_name)}</td><td>${esc(r.total_marks??'—')}</td><td>${esc(r.obtained_marks??'—')}</td><td>${esc(r.percentage??'—')}%</td><td>${esc(r.grade??'—')}</td><td>${esc(r.rank??'—')}</td><td><span class="status ${r.published?'accepted':'cancelled'}">${r.published?'Published':'Hidden'}</span></td><td><div class="actions"><button class="btn2 green" onclick="toggleResult('${r.id}',${!r.published})">${r.published?'Unpublish':'Publish'}</button><button class="btn2 red2" onclick="deleteRow('exam_results','${r.id}',resultsPage)">Delete</button></div></td></tr>`).join('')}</tbody></table></div>`}
-function resultForm(){openModal('Add / Publish Exam Result',`<div class="formGrid"><input id="rStudent" placeholder="Student ID"><input id="rExam" placeholder="Exam Name"><input id="rDate" type="date"><input id="rTotal" type="number" placeholder="Total Marks"><input id="rObtained" type="number" placeholder="Obtained Marks"><input id="rGrade" placeholder="Grade"><input id="rRank" type="number" placeholder="Rank"><input id="rAttendance" type="number" step="0.01" placeholder="Attendance %"><textarea id="rComment" class="full" placeholder="Teacher Comment"></textarea><textarea id="rSubjects" class="full" placeholder='Subjects JSON e.g. [{"subject":"Bangla","full":100,"mark":80}]'>[]</textarea></div><br><button class="btn2 green" onclick="saveResult()">Publish Result</button>`)}
-async function saveResult(){let subjects=[];try{subjects=JSON.parse(rSubjects.value||'[]')}catch(e){return alert('Subjects JSON সঠিক নয়।')}const total=Number(rTotal.value||0),obtained=Number(rObtained.value||0);const row={student_id:rStudent.value.trim(),exam_name:rExam.value.trim(),exam_date:rDate.value||null,subjects,total_marks:total,obtained_marks:obtained,percentage:total?Number((obtained/total*100).toFixed(2)):0,grade:rGrade.value.trim()||null,rank:rRank.value?Number(rRank.value):null,attendance:rAttendance.value?Number(rAttendance.value):null,teacher_comment:rComment.value.trim()||null,published:true};if(!row.student_id||!row.exam_name)return alert('Student ID ও Exam Name দিন।');const {error}=await db.from('exam_results').insert(row);if(error)return alert(error.message);closeModal();resultsPage()}
+async function resultsPage(){
+  const {data,error}=await db.from('exam_results').select('*').order('created_at',{ascending:false});
+  if(error)return alert(error.message);
+
+  content.innerHTML=`
+  <div class="box">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <h2 style="margin:0">📊 Exam Result</h2>
+        <div class="muted">একজনের result অথবা পুরো class-এর result একসাথে publish করুন।</div>
+      </div>
+      <div class="actions">
+        <button class="btn2 blue" onclick="resultForm()">+ Single Result</button>
+        <button class="btn2 orange" onclick="bulkResultForm()">📚 Publish Class Result</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="box tableWrap">
+    <table class="dataTable">
+      <thead>
+        <tr>
+          <th>Student ID</th><th>Exam</th><th>Total</th><th>Obtained</th><th>%</th><th>Grade</th><th>Rank</th><th>Status</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${(data||[]).map(r=>`<tr>
+          <td>${esc(r.student_id)}</td><td>${esc(r.exam_name)}</td><td>${esc(r.total_marks??'—')}</td><td>${esc(r.obtained_marks??'—')}</td>
+          <td>${esc(r.percentage??'—')}%</td><td>${esc(r.grade??'—')}</td><td>${esc(r.rank??'—')}</td>
+          <td><span class="status ${r.published?'accepted':'cancelled'}">${r.published?'Published':'Hidden'}</span></td>
+          <td><div class="actions"><button class="btn2 green" onclick="toggleResult('${r.id}',${!r.published})">${r.published?'Unpublish':'Publish'}</button><button class="btn2 red2" onclick="deleteRow('exam_results','${r.id}',resultsPage)">Delete</button></div></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function resultForm(){
+  openModal('Add / Publish Exam Result',`
+    <div class="formGrid">
+      <input id="rStudent" placeholder="Student ID">
+      <input id="rExam" placeholder="Exam Name">
+      <input id="rDate" type="date">
+      <input id="rTotal" type="number" placeholder="Total Marks">
+      <input id="rObtained" type="number" placeholder="Obtained Marks">
+      <input id="rGrade" placeholder="Grade">
+      <input id="rRank" type="number" placeholder="Rank">
+      <input id="rAttendance" type="number" step="0.01" placeholder="Attendance %">
+      <textarea id="rComment" class="full" placeholder="Teacher Comment"></textarea>
+      <textarea id="rSubjects" class="full" placeholder='Subjects JSON e.g. [{"subject":"Bangla","full":100,"mark":80}]'>[]</textarea>
+    </div>
+    <br><button class="btn2 green" onclick="saveResult()">Publish Result</button>`);
+}
+
+async function saveResult(){
+  let subjects=[];
+  try{subjects=JSON.parse(rSubjects.value||'[]')}catch(e){return alert('Subjects JSON সঠিক নয়।')}
+  const total=Number(rTotal.value||0),obtained=Number(rObtained.value||0);
+  const row={
+    student_id:rStudent.value.trim(),exam_name:rExam.value.trim(),exam_date:rDate.value||null,subjects,
+    total_marks:total,obtained_marks:obtained,percentage:total?Number((obtained/total*100).toFixed(2)):0,
+    grade:rGrade.value.trim()||null,rank:rRank.value?Number(rRank.value):null,attendance:rAttendance.value?Number(rAttendance.value):null,
+    teacher_comment:rComment.value.trim()||null,published:true
+  };
+  if(!row.student_id||!row.exam_name)return alert('Student ID ও Exam Name দিন।');
+  const {error}=await db.from('exam_results').insert(row);
+  if(error)return alert(error.message);
+  closeModal();resultsPage();
+}
+
+async function bulkResultForm(){
+  openModal('📚 Publish Class Result',`
+    <div class="bulkGrid">
+      <div><label><b>Class</b></label><select id="bulkClass"><option value="">Class নির্বাচন করুন</option><option>Play</option><option>Nursery</option><option>Class One</option><option>Class Two</option><option>Class Three</option><option>Class Four</option><option>Class Five</option><option>Class Six</option><option>Class Seven</option><option>Class Eight</option></select></div>
+      <div><label><b>Exam Name</b></label><input id="bulkExam" placeholder="Half Yearly Examination"></div>
+      <div><label><b>Exam Date</b></label><input id="bulkDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div>
+    </div>
+    <br>
+    <div class="bulkActions">
+      <button class="btn2 blue" onclick="loadBulkStudents()">Load Class Students</button>
+      <button class="btn2 gray" onclick="downloadResultTemplate()">⬇️ CSV Template</button>
+      <label class="btn2 gray" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">📤 Upload CSV <input id="bulkCsvFile" type="file" accept=".csv,text/csv" style="display:none" onchange="importBulkCsv(event)"></label>
+    </div>
+    <p class="bulkHint">প্রথমে Class ও Exam Name দিন। তারপর students load করুন। Total/Obtained বসালে Percentage নিজে হিসাব হবে। Rank ফাঁকা রাখা যাবে।</p>
+    <div id="bulkResultArea"></div>`);
+}
+
+async function loadBulkStudents(){
+  const className=bulkClass.value.trim(), examName=bulkExam.value.trim();
+  if(!className||!examName)return alert('Class ও Exam Name দিন।');
+  const {data,error}=await db.from('students').select('student_id,name,roll,batch,class_name').eq('class_name',className).order('roll',{ascending:true,nullsFirst:false}).order('name',{ascending:true});
+  if(error)return alert(error.message);
+  const students=data||[];
+  if(!students.length){
+    bulkResultArea.innerHTML='<div class="bulkHint">এই class-এ কোনো student পাওয়া যায়নি।</div>';return;
+  }
+  renderBulkRows(students,{});
+}
+
+function renderBulkRows(students,prefill){
+  bulkResultArea.innerHTML=`
+    <div class="bulkHint" style="margin:12px 0">মোট ${students.length} জন student। নিচে marks বসান। তারপর <b>Publish All</b> চাপুন।</div>
+    <div class="tableWrap">
+      <table class="bulkTable">
+        <thead><tr><th>#</th><th>Student</th><th>ID</th><th>Roll</th><th>Total</th><th>Obtained</th><th>%</th><th>Grade</th><th>Rank</th><th>Attendance</th><th>Comment</th></tr></thead>
+        <tbody>
+          ${students.map((s,i)=>{
+            const v=prefill[s.student_id]||{};
+            return `<tr data-sid="${esc(s.student_id)}">
+              <td>${i+1}</td><td><strong>${esc(s.name)}</strong></td><td>${esc(s.student_id)}</td><td>${esc(s.roll||'—')}</td>
+              <td><input class="bTotal" type="number" value="${esc(v.total??'')}" placeholder="100"></td>
+              <td><input class="bObtained" type="number" value="${esc(v.obtained??'')}" placeholder="0"></td>
+              <td><input class="bPercentage" type="number" step="0.01" value="${esc(v.percentage??'')}" readonly></td>
+              <td><input class="bGrade" value="${esc(v.grade??'')}" placeholder="A+"></td>
+              <td><input class="bRank" type="number" value="${esc(v.rank??'')}" placeholder="—"></td>
+              <td><input class="bAttendance" type="number" step="0.01" value="${esc(v.attendance??'')}" placeholder="100"></td>
+              <td><input class="bComment" value="${esc(v.comment??'')}" placeholder="Comment"></td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+    <br><div class="bulkActions"><button class="btn2 green" onclick="publishBulkResults()">✅ Publish All ${students.length} Results</button><span id="bulkStatus" class="muted"></span></div>`;
+
+  document.querySelectorAll('#bulkResultArea tr[data-sid]').forEach(row=>{
+    const total=row.querySelector('.bTotal'),obt=row.querySelector('.bObtained'),pct=row.querySelector('.bPercentage');
+    const calc=()=>{const t=Number(total.value||0),o=Number(obt.value||0);pct.value=t>0?((o/t)*100).toFixed(2):''};
+    total.addEventListener('input',calc);obt.addEventListener('input',calc);calc();
+  });
+}
+
+function downloadResultTemplate(){
+  const csv=[
+    'student_id,total_marks,obtained_marks,grade,rank,attendance,teacher_comment',
+    '10001,100,80,A+,1,100,Excellent',
+    '10002,100,75,A,2,98,Very Good'
+  ].join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TUCLC_result_template.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+
+function parseCsvLine(line){
+  const out=[];let cur='';let quote=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"' && line[i+1]==='"'){cur+='"';i++;continue;}
+    if(ch==='"'){quote=!quote;continue;}
+    if(ch===','&&!quote){out.push(cur.trim());cur='';continue;}
+    cur+=ch;
+  }
+  out.push(cur.trim());return out;
+}
+
+async function importBulkCsv(event){
+  const file=event.target.files?.[0];
+  if(!file)return;
+  const text=await file.text();
+  const lines=text.split(/\r?\n/).filter(x=>x.trim());
+  if(lines.length<2)return alert('CSV-তে data নেই।');
+  const headers=parseCsvLine(lines[0]).map(h=>h.toLowerCase());
+  const required=['student_id','total_marks','obtained_marks'];
+  if(!required.every(h=>headers.includes(h)))return alert('CSV header-এ student_id,total_marks,obtained_marks থাকতে হবে।');
+  const index={};headers.forEach((h,i)=>index[h]=i);
+  const prefill={};
+  lines.slice(1).forEach(line=>{
+    const c=parseCsvLine(line),sid=(c[index.student_id]||'').trim();if(!sid)return;
+    prefill[sid]={total:c[index.total_marks]||'',obtained:c[index.obtained_marks]||'',grade:index.grade!==undefined?(c[index.grade]||''):'',rank:index.rank!==undefined?(c[index.rank]||''):'',attendance:index.attendance!==undefined?(c[index.attendance]||''):'',comment:index.teacher_comment!==undefined?(c[index.teacher_comment]||''):''};
+  });
+  const className=bulkClass.value.trim();
+  if(!className)return alert('CSV import-এর আগে Class নির্বাচন করুন।');
+  const {data,error}=await db.from('students').select('student_id,name,roll,batch,class_name').eq('class_name',className).order('roll',{ascending:true,nullsFirst:false}).order('name',{ascending:true});
+  if(error)return alert(error.message);
+  const students=data||[];
+  if(!students.length)return alert('এই class-এ কোনো student নেই।');
+  renderBulkRows(students,prefill);
+}
+
+async function publishBulkResults(){
+  const examName=bulkExam.value.trim(),examDate=bulkDate.value||null;
+  if(!examName)return alert('Exam Name দিন।');
+  const rows=[...document.querySelectorAll('#bulkResultArea tr[data-sid]')].map(row=>{
+    const total=Number(row.querySelector('.bTotal').value||0),obt=Number(row.querySelector('.bObtained').value||0);return{
+      student_id:row.dataset.sid,exam_name:examName,exam_date:examDate,subjects:[],total_marks:total,obtained_marks:obt,
+      percentage:total?Number((obt/total*100).toFixed(2)):0,grade:row.querySelector('.bGrade').value.trim()||null,rank:row.querySelector('.bRank').value?Number(row.querySelector('.bRank').value):null,
+      attendance:row.querySelector('.bAttendance').value?Number(row.querySelector('.bAttendance').value):null,teacher_comment:row.querySelector('.bComment').value.trim()||null,published:true
+    };
+  });
+  if(!rows.length)return alert('Student list load করুন।');
+  const invalid=rows.find(r=>!r.student_id||!r.exam_name||!Number.isFinite(r.total_marks)||r.total_marks<=0||r.obtained_marks<0||r.obtained_marks>r.total_marks);
+  if(invalid)return alert(`Student ${invalid.student_id}: Total/Obtained marks সঠিকভাবে দিন।`);
+  const status=document.getElementById('bulkStatus');if(status)status.textContent='Publishing...';
+  let done=0;
+  for(const row of rows){
+    const {data:existing,error:findError}=await db.from('exam_results').select('id').eq('student_id',row.student_id).eq('exam_name',row.exam_name).eq('exam_date',row.exam_date).maybeSingle();
+    if(findError){if(status)status.textContent='Error';return alert(findError.message)}
+    const res=existing?await db.from('exam_results').update({...row,updated_at:new Date().toISOString()}).eq('id',existing.id):await db.from('exam_results').insert(row);
+    if(res.error){if(status)status.textContent='Error';return alert(`${row.student_id}: ${res.error.message}`)}
+    done++;
+    if(status)status.textContent=`${done}/${rows.length} published...`;
+  }
+  if(status)status.textContent=`✅ ${done}টি result publish হয়েছে।`;
+  alert(`পুরো class-এর ${done}টি result সফলভাবে publish হয়েছে।`);
+  await resultsPage();
+}
+
 async function toggleResult(id,published){const {error}=await db.from('exam_results').update({published,updated_at:new Date().toISOString()}).eq('id',id);if(error)return alert(error.message);resultsPage()}
 async function admissionsPage(){const {data,error}=await db.from('admissions').select('*').order('created_at',{ascending:false});if(error)return alert(error.message);content.innerHTML=`<div class="box"><h2 style="margin-top:0">📝 Online Admission Requests</h2><p class="muted">আবেদনকারীর সম্পূর্ণ তথ্য দেখে Accept বা Cancel করুন। Accept করলে student record তৈরি হবে।</p></div><div class="box tableWrap"><table class="dataTable"><thead><tr><th>Applicant</th><th>Class</th><th>Guardian</th><th>Phone</th><th>Email</th><th>Status</th><th>Submitted</th><th>Action</th></tr></thead><tbody>${(data||[]).map(a=>`<tr><td><strong>${esc(a.applicant_name)}</strong><div class="muted">${esc(a.message||'')}</div></td><td>${esc(a.class_name||'—')}</td><td>${esc(a.guardian_name||'—')}</td><td>${esc(a.phone||'—')}</td><td>${esc(a.email||'—')}</td><td><span class="status ${esc(a.status)}">${esc(a.status)}</span></td><td>${esc(a.created_at||'')}</td><td><div class="actions"><button class="btn2 gray" onclick="viewAdmission('${a.id}')">View</button>${a.status==='pending'?`<button class="btn2 green" onclick="acceptForm('${a.id}')">Accept</button><button class="btn2 red2" onclick="cancelAdmission('${a.id}')">Cancel</button>`:''}</div></td></tr>`).join('')}</tbody></table></div>`}
 async function viewAdmission(id){const {data,error}=await db.from('admissions').select('*').eq('id',id).single();if(error)return alert(error.message);openModal('Admission Details',`<div class="box" style="margin:0"><p><b>Student:</b> ${esc(data.applicant_name)}</p><p><b>Class:</b> ${esc(data.class_name||'—')}</p><p><b>Guardian:</b> ${esc(data.guardian_name||'—')}</p><p><b>Phone:</b> ${esc(data.phone||'—')}</p><p><b>Email:</b> ${esc(data.email||'—')}</p><p><b>Status:</b> ${esc(data.status)}</p><hr><p style="white-space:pre-wrap"><b>Message:</b><br>${esc(data.message||'')}</p></div>`)}
